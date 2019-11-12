@@ -52,9 +52,9 @@ export default (variant, colorblindUI) => {
             ctx.lineJoin = 'round';
 
             if (rank !== constants.STACK_BASE_RANK && rank !== constants.UNKNOWN_CARD_RANK) {
-                let textYPos;
+                //let textYPos;
                 let rankLabel = rank.toString();
-                if (rank === constants.START_CARD_RANK) {
+                /*if (rank === constants.START_CARD_RANK) {
                     rankLabel = 'S';
                 }
                 let fontSize;
@@ -70,18 +70,21 @@ export default (variant, colorblindUI) => {
                 ctx.font = `bold ${fontSize}pt Arial`;
 
                 // Draw the rank on the top left
-                drawText(ctx, textYPos, rankLabel);
+                drawText(ctx, textYPos, rankLabel);*/
+                if ([1,2,3,4,5].includes(rank)) {
+                    drawPip(ctx, {'pip':'number' + rankLabel}, false, false);
 
-                // "Index" cards are used to draw cards of learned but not yet known rank
-                // (e.g. for in-game replays)
-                cardImages[`Index-${suit.name}-${rank}`] = cloneCanvas(cvs);
+                    // "Index" cards are used to draw cards of learned but not yet known rank
+                    // (e.g. for in-game replays)
+                    cardImages[`Index-${suit.name}-${rank}`] = cloneCanvas(cvs);
 
-                // Draw the rank on the bottom right
-                ctx.save();
-                ctx.translate(CARD_W, CARD_H);
-                ctx.rotate(Math.PI);
-                drawText(ctx, textYPos, rankLabel);
-                ctx.restore();
+                    // Draw the rank on the bottom right
+                    ctx.save();
+                    ctx.translate(CARD_W, CARD_H);
+                    ctx.rotate(Math.PI);
+                    drawPip(ctx, {'pip':'number' + rankLabel}, false, false);
+                    ctx.restore();
+                }
             }
 
             // "NoPip" cards are used for
