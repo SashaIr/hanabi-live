@@ -13,12 +13,12 @@
         "fillColors": ["#0044cc", "#00cc00", "#ccaa22", "#aa0000", "#6600cc"],
         "pip": "rainbow"
     },
-
     "Teal": { "pip": "flower" },
-    "Black": { "oneOfEach": true,
-         "pip": "rainbow",
+    "Black": {
+         "oneOfEach": true,
+         "pip": "multi",
          "fill": "multi",
-         "fillColors": ["#0044cc", "#00cc00", "#ccaa22", "#aa0000", "#6600cc"],
+         "fillColors": ["#0044cc", "#00cc00", "#ccaa22", "#aa0000", "#6600cc"]
      },
     "Rainbow": {
         "abbreviation": "M",

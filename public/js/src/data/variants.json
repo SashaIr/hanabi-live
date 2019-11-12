@@ -19,7 +19,7 @@
 
     "Black (6 Suits)": {
         "id": 2,
-        "suits": ["Blue", "Green", "Yellow", "Red", "Purple", "Black"]
+        "suits": ["Red", "Yellow", "Green", "Blue", "Purple", "Black"]
     },
     "Black (5 Suits)": {
         "id": 21,
