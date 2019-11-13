@@ -97,7 +97,14 @@ export const set = (i, element, giver, clue) => {
                 arrow.text.setText(clue.value.toString());
                 arrow.text.show();
             } else if (clue.type === constants.CLUE_TYPE.COLOR) {
-                arrow.circle.setFill(clue.value.fill);
+                if (clue.value.fill === "gradient") {
+                    arrow.circle.setFillLinearGradientColorStops(clue.value.fillColorStops);
+                    arrow.circle.setFillPriority('linear-gradient');
+                }
+                else {
+                    arrow.circle.setFill(clue.value.fill);
+                    arrow.circle.setFillPriority('color');
+                }
                 arrow.text.hide();
             }
         }

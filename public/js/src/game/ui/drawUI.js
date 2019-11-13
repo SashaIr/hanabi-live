@@ -1328,6 +1328,9 @@ const drawArrows = () => {
                 y: y * 0.3,
                 radius: pointerLength * 2.25,
                 fill: 'black',
+                fillLinearGradientStartPoint: {'x': - pointerLength * 1.5, 'y': - pointerLength * 1.5},
+                fillLinearGradientEndPoint: {'x': pointerLength * 1.5 , 'y': pointerLength * 1.5},
+                fillPriority: 'color',
                 stroke: 'white',
                 strokeWidth: pointerLength * 0.25,
                 visible: false,
@@ -1545,6 +1548,7 @@ const drawClueArea = () => {
             width: buttonW * winW,
             height: buttonH * winH,
             color: color.fill,
+            colorStops: color.fillColorStops,
             text: color.abbreviation,
             clue: new Clue(constants.CLUE_TYPE.COLOR, color),
         });

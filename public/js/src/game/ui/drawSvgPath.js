@@ -17,7 +17,6 @@
 export default (ctx, commandList) => {
     ctx.beginPath();
     var lastPos = [ 0, 0 ]; var pointOne, pointTwo;
-    console.log(commandList);
     commandList.forEach(function(command) {
         if ((command.marker === 'z') || (command.marker === 'Z')) {
             lastPos = [ 0, 0 ];

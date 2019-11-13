@@ -27,16 +27,25 @@ export default class ColorButton extends graphics.Group {
         });
         this.add(this.background);
 
-        const color = new graphics.Rect({
+        let opt = {
             x: 0.1 * w,
             y: 0.1 * h,
             width: 0.8 * w,
             height: 0.8 * h,
             cornerRadius: 0.12 * 0.8 * h,
-            fill: config.color,
             opacity: 0.9,
             listening: false,
-        });
+        };
+        if (config.color === 'gradient') {
+            opt.fillLinearGradientStartPoint = {"x": 0.1 * h, "y": 0.1 * h};
+            opt.fillLinearGradientEndPoint = {"x": 0.9 * h, "y": 0.9 * h};
+            opt.fillLinearGradientColorStops = config.colorStops;
+        }
+        else {
+            opt.fill = config.color;
+        }
+
+        const color = new graphics.Rect(opt);
         this.add(color);
 
         const text = new graphics.Text({

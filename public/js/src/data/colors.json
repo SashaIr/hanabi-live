@@ -3,7 +3,12 @@
     "Green": { "fill": "#02ec00" },
     "Yellow": { "fill": "#ffff00" },
     "Red": { "fill": "#ff0000" },
-    "Purple": { "fill": "#bbbbbb" },
+    "Purple": { "fill": "#6600cc" },
+    "White": { "fill": "#bbbbbb" },
+    "Multi": {
+        "fill": "gradient",
+        "fillColorStops": [0, "#ff0000", 0.25, "#ffff00", 0.5, "#02ec00", 0.75, "#0037ff", 1, "#bbbbbb"]
+    },
 
     "Teal": { "fill": "#00cccc" },
     "Black": { "abbreviation": "K", "fill": "#111111" },
