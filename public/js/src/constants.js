@@ -26,7 +26,7 @@ export const TOOLTIP_DELAY = 500; // In milliseconds
 export const ARROW_COLOR = {
     DEFAULT: '#ffffff', // White
     RETOUCHED: '#737373', // Dark gray
-    HIGHLIGHT: '#ffdf00', // Yellow
+    HIGHLIGHT: '#ffa500', // Orange
 };
 
 // These constants much match their server-side counterparts

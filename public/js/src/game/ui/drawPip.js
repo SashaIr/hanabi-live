@@ -383,7 +383,7 @@ const shapeFunctions = {
 
 export default function drawPip(ctx, suit, shadow, deckBack) {
     if (suit.pip === 'rainbow') {
-        var suits = [{'pip': 'rainbow_red', 'fill':'#aa0000'}, {'pip': 'rainbow_green', 'fill':'#00cc00'}, {'pip': 'rainbow_white', 'fill':'#bbbbbb'}, {'pip': 'rainbow_blue', 'fill':'#0044cc'}, {'pip': 'rainbow_yellow', 'fill':'#ccaa22'}, {'pip': 'rainbow_center', 'fill':'#bbbbbb'}]
+        var suits = [{'pip': 'rainbow_red', 'fill':'#ff0000'}, {'pip': 'rainbow_green', 'fill':'#02ec00'}, {'pip': 'rainbow_white', 'fill':'#ffffff'}, {'pip': 'rainbow_blue', 'fill':'#0037ff'}, {'pip': 'rainbow_yellow', 'fill':'#ffff00'}, {'pip': 'rainbow_center', 'fill':'#ffffff'}]
         for (let s of suits) {
             drawPip(ctx, s, shadow, deckBack)
         }

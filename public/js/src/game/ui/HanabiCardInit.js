@@ -43,7 +43,7 @@ export function border() {
         height: constants.CARD_H - 6,
         cornerRadius: 6,
         strokeWidth: 16,
-        stroke: '#ffdf00', // Yellow
+        stroke: '#ffa500', // Orange
         visible: false,
         listening: false,
     });
@@ -119,12 +119,12 @@ export function pips() {
         });
 
         // Gradient numbers are magic
-        if (suit.fill === 'multi') {
+        if (suit.fill === 'rainbow') {
             suitPip.fillRadialGradientColorStops([
-                0.3, suit.fillColors[0],
-                0.425, suit.fillColors[1],
-                0.65, suit.fillColors[2],
-                0.875, suit.fillColors[3],
+                0, suit.fillColors[0],
+                0.25, suit.fillColors[1],
+                0.5, suit.fillColors[2],
+                0.75, suit.fillColors[3],
                 1, suit.fillColors[4],
             ]);
             suitPip.fillRadialGradientStartPoint({
@@ -201,7 +201,7 @@ export function pips() {
         this.rankPipsMap.set(rank, rankPip);
 
         rankPip.showPositiveClue = () => {
-            rankPip.setFill('#ffdf00'); // Yellow
+            rankPip.setFill('#ffa500'); // Orange
             // (the same color as the "clued" border around a card)
         };
         rankPip.hidePositiveClue = () => {
