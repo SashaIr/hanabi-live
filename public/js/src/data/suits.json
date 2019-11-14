@@ -10,7 +10,7 @@
     "Rainbow": {
         "oneOfEach": true,
         "fill": "rainbow",
-        "fillColors": ["#bbbbbb", "#0037ff", "#02ec00", "#ffff00", "#ff0000"],
+        "fillColors": ["#ffffff", "#0037ff", "#02ec00", "#ffff00", "#ff0000"],
         "pip": "rainbow"
     },
     "Teal": { "pip": "flower" },
