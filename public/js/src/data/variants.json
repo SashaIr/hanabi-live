@@ -91,4 +91,5 @@
         "id": 53,
         "suits": ["Red", "Yellow", "Green", "Blue"],
         "spacing": true
-    },
+    }
+}
