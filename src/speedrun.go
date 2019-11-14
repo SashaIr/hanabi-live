@@ -12,7 +12,6 @@ var (
 		"Six Suits",
 		"Black (6 Suits)",
 		"Rainbow (6 Suits)",
-		"Dark Rainbow (6 Suits)",
 	}
 )
 
