@@ -427,7 +427,7 @@ const drawCardTexture = (ctx) => {
 
 const getSuitStyle = (suit, ctx, cardArea) => {
     // Nearly all suits have a solid fill
-    if (suit.fill !== 'multi') {
+    if (suit.fill !== 'rainbow') {
         return suit.fill;
     }
 
