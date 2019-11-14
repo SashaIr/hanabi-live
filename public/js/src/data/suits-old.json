@@ -1,35 +1,54 @@
 {
     "Unknown": { "abbreviation": "", "clueColors": [], "fill": "#cccccc" },
 
-    "Red": { "pip": "red" },
-    "Yellow": { "pip": "yellow" },
-    "Green": { "pip": "green" },
     "Blue": { "pip": "blue" },
-    "Purple": { "pip": "crescent" },
+    "Green": { "pip": "green" },
+    "Yellow": { "pip": "yellow" },
+    "Red": { "pip": "red" },
     "White": { "pip": "white" },
-    "Rainbow": {
+    "Purple": { "pip": "crescent" },
+    "Multi": {
         "oneOfEach": true,
-        "fill": "rainbow",
+        "fill": "multi",
         "fillColors": ["#bbbbbb", "#0037ff", "#02ec00", "#ffff00", "#ff0000"],
-        "pip": "rainbow"
+        "pip": "multi"
     },
     "Teal": { "pip": "flower" },
     "Black": { "oneOfEach": true, "pip": "spade" },
-    "Multi": {
+    "Rainbow": {
         "abbreviation": "M",
         "allClueColors": true,
-        "fill": "rainbow",
+        "fill": "multi",
         "fillColors": ["#0044cc", "#00cc00", "#ccaa22", "#aa0000", "#6600cc"],
         "pip": "rainbow"
     },
+    "Pink": { "clueRanks": "all", "pip": "number_sign" },
     "Colorless": { "clueColors": [], "fill": "#d9d9d9", "pip": "circle" },
+    "Brown": { "clueRanks": "none", "pip": "tensor_symbol" },
+    "Omni": {
+        "allClueColors": true,
+        "clueRanks": "all",
+        "fill": "multi",
+        "fillColors": ["#000000", "#0044cc", "#00cc00", "#ccaa22", "#aa0000", "#6600cc", "#000000"],
+        "pip": "infinity"
+    },
+    "Null": { "abbreviation": "U", "clueColors": [], "clueRanks": "none", "fill": "#ffffff", "pip": "null_symbol" },
+
     "Dark Rainbow": {
         "abbreviation": "M",
         "allClueColors": true,
-        "fill": "rainbow",
+        "fill": "multi",
         "fillColors": ["#000555", "#005505", "#555500", "#5f0000", "#550055"],
         "oneOfEach": true,
         "pip": "rainbow"
+    },
+    "Dark Pink": {
+        "abbreviation": "I",
+        "clueColors": ["Pink"],
+        "clueRanks": "all",
+        "fill": "#800040",
+        "oneOfEach": true,
+        "pip": "number_sign"
     },
     "Gray": {
         "abbreviation": "A",
@@ -38,6 +57,64 @@
         "oneOfEach": true,
         "pip": "circle"
     },
+    "Chocolate": {
+        "clueColors": ["Brown"],
+        "clueRanks": "none",
+        "fill": "#271a0c",
+        "oneOfEach": true,
+        "pip": "tensor_symbol"
+    },
+    "Dark Omni": {
+        "abbreviation": "O",
+        "allClueColors": true,
+        "clueRanks": "all",
+        "fill": "multi",
+        "fillColors": ["#000000", "#001a4d", "#004d00", "#41370b", "#4d0000", "#26004d", "#000000"],
+        "oneOfEach": true,
+        "pip": "infinity"
+    },
+    "Dark Null": {
+        "abbreviation": "U",
+        "clueColors": [],
+        "clueRanks": "none",
+        "fill": "#a6a6a6",
+        "oneOfEach": true,
+        "pip": "null_symbol"
+    },
+
+    "Muddy Rainbow": {
+        "abbreviation": "M",
+        "allClueColors": true,
+        "clueRanks": "none",
+        "fill": "multi",
+        "fillColors": ["#654321", "#00cc00", "#ccaa22", "#aa0000", "#654321"],
+        "pip": "rainbow"
+    },
+    "Light Pink": {
+        "abbreviation": "I",
+        "clueColors": [],
+        "clueRanks": "all",
+        "fill": "#ffcce6",
+        "pip": "number_sign"
+     },
+     "Cocoa Rainbow": {
+        "abbreviation": "M",
+        "allClueColors": true,
+        "clueRanks": "none",
+        "fill": "multi",
+        "fillColors": ["#654321", "#00cc00", "#ccaa22", "#aa0000", "#654321"],
+        "oneOfEach": true,
+        "pip": "rainbow"
+    },
+    "Chiaroscuro Pink": {
+        "abbreviation": "I",
+        "clueColors": [],
+        "clueRanks": "all",
+        "fill": "#ffcce6",
+        "oneOfEach": true,
+        "pip": "number_sign"
+     },
+
     "Blue CB": { "clueColors": [], "name": "Blue", "pip": "diamond" },
     "Green CB": { "clueColors": [], "name": "Green", "pip": "club" },
     "Yellow CB": { "clueColors": [], "name": "Yellow", "pip": "star" },
