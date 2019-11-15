@@ -209,12 +209,23 @@ const drawSuitPips = (ctx, rank, suit, colorblindUI) => {
         ctx.restore();
     }
 
-    // Size, position, and alpha adjustment for the central icon on stack base and 5
-    if (rank === 0 || rank === 3 || rank === 5) {
+    // Size, position, and alpha adjustment for the central icon on 3 and 5
+    if (rank === 3 || rank === 5) {
         ctx.globalAlpha = 1;
         ctx.save();
         ctx.translate(CARD_W / 2, CARD_H / 2);
         ctx.scale(scale * 1.2, scale * 1.2);
+        ctx.translate(-75, -100);
+        drawPip(ctx, suit, true, false);
+        ctx.restore();
+    }
+
+    // Size, position, and alpha adjustment for the central icon on stack base and 5
+    if (rank === 0) {
+        ctx.globalAlpha = 1;
+        ctx.save();
+        ctx.translate(CARD_W / 2, CARD_H / 2);
+        ctx.scale(scale * 2, scale * 2);
         ctx.translate(-75, -100);
         drawPip(ctx, suit, true, false);
         ctx.restore();
