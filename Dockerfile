@@ -33,4 +33,6 @@ EXPOSE 80
 
 VOLUME /repo
 
-CMD ./install/install_dependencies.sh && ./build_client.sh && service mysql start && ./run.sh
+STOPSIGNAL SIGINT
+
+CMD service mysql start && ./run.sh
