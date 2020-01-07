@@ -25,6 +25,7 @@ export default () => {
     globals.timed = false;
     globals.baseTime = null;
     globals.timePerTurn = null;
+    globals.cardcycle = false;
     globals.speedrun = false;
     globals.deckPlays = false;
     globals.emptyClues = false;

@@ -107,6 +107,7 @@ func convertDatabaseGametoGame(s *Session, d *CommandData, t *Table) bool {
 		Timed:                options.Timed,
 		BaseTime:             options.BaseTime,
 		TimePerTurn:          options.TimePerTurn,
+		CardCycle:            options.CardCycle,
 		Speedrun:             options.Speedrun,
 		DeckPlays:            options.DeckPlays,
 		EmptyClues:           options.EmptyClues,

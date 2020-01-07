@@ -106,36 +106,38 @@ func commandAction(s *Session, d *CommandData) {
 	}
 
 	// Handle card-reordering
-	if d.Type == 0 {// Only when a player gives a clue
+	if t.Options.CardCycle {// If Card Cycling is enabled
+		if d.Type == 0 {// Only when a player gives a clue
 
-		// Find the chop card
-		chopIndex := g.Players[i].GetChopIndex()
+			// Find the chop card
+			chopIndex := g.Players[i].GetChopIndex()
 
-		// We don't need to reorder anything if the chop is slot 1
-		// (the left-most card)
-		if chopIndex != len(p.Hand)-1 {
-			chopCard := p.Hand[chopIndex]
+			// We don't need to reorder anything if the chop is slot 1
+			// (the left-most card)
+			if chopIndex != len(p.Hand)-1 {
+				chopCard := p.Hand[chopIndex]
 
-			// Remove the chop card from their hand
-			p.Hand = append(p.Hand[:chopIndex], p.Hand[chopIndex+1:]...)
+				// Remove the chop card from their hand
+				p.Hand = append(p.Hand[:chopIndex], p.Hand[chopIndex+1:]...)
 
-			// Add it to the end (the left-most position)
-			p.Hand = append(p.Hand, chopCard)
+				// Add it to the end (the left-most position)
+				p.Hand = append(p.Hand, chopCard)
 
-			// Make an array that represents the order of the player's hand
-			handOrder := make([]int, 0)
-			for _, c := range p.Hand {
-				handOrder = append(handOrder, c.Order)
+				// Make an array that represents the order of the player's hand
+				handOrder := make([]int, 0)
+				for _, c := range p.Hand {
+					handOrder = append(handOrder, c.Order)
+				}
+
+				// Notify everyone about the reordering
+				g.Actions = append(g.Actions, ActionReorder{
+					Type:      "reorder",
+					Target:    p.Index,
+					HandOrder: handOrder,
+				})
+				t.NotifyAction()
+				log.Info("Reordered the cards for player:", p.Name)
 			}
-
-			// Notify everyone about the reordering
-			g.Actions = append(g.Actions, ActionReorder{
-				Type:      "reorder",
-				Target:    p.Index,
-				HandOrder: handOrder,
-			})
-			t.NotifyAction()
-			log.Info("Reordered the cards for player:", p.Name)
 		}
 	}
 

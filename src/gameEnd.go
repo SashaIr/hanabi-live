@@ -208,6 +208,7 @@ func (g *Game) WriteDatabase() error {
 		Timed:                g.Options.Timed,
 		TimeBase:             g.Options.BaseTime,
 		TimePerTurn:          g.Options.TimePerTurn,
+		CardCycle:            g.Options.CardCycle,
 		Speedrun:             g.Options.Speedrun,
 		DeckPlays:            g.Options.DeckPlays,
 		EmptyClues:           g.Options.EmptyClues,
@@ -281,15 +282,18 @@ func (g *Game) WriteDatabase() error {
 
 		// Compute the integer modifier for this game
 		// 0 if no extra options
-		// 1 if deck play
-		// 2 if empty clues
-		// 3 if both
+		// +1 if deck plays
+		// +2 if empty clues
+		// +4 if card cycle
 		modifier := 0
 		if g.Options.DeckPlays {
 			modifier++
 		}
 		if g.Options.EmptyClues {
 			modifier += 2
+		}
+		if g.Options.CardCycle {
+			modifier += 4
 		}
 
 		// 2-player is at index 0, 3-player is at index 1, etc.

@@ -154,6 +154,7 @@ func commandTableCreate(s *Session, d *CommandData) {
 				d.Timed = v.Timed
 				d.BaseTime = v.BaseTime
 				d.TimePerTurn = v.TimePerTurn
+				d.CardCycle = v.CardCycle
 				d.Speedrun = v.Speedrun
 				d.DeckPlays = v.DeckPlays
 				d.EmptyClues = v.EmptyClues
@@ -233,6 +234,7 @@ func commandTableCreate(s *Session, d *CommandData) {
 		Timed:                d.Timed,
 		BaseTime:             d.BaseTime,
 		TimePerTurn:          d.TimePerTurn,
+		CardCycle:            d.CardCycle,
 		Speedrun:             d.Speedrun,
 		DeckPlays:            d.DeckPlays,
 		EmptyClues:           d.EmptyClues,

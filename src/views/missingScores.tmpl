@@ -76,6 +76,14 @@
                                 <i class="fas fa-times score-modifier red tooltip" data-tooltip-content="#modifier-emptyclues"></i>
                             {{else if eq .Modifier 3}}
                                 <i class="fas fa-times score-modifier red tooltip" data-tooltip-content="#modifier-deckplays-emptyclues"></i>
+                            {{else if eq .Modifier 4}}
+                                <i class="fas fa-times score-modifier red tooltip" data-tooltip-content="#modifier-cardcycle"></i>
+                            {{else if eq .Modifier 5}}
+                                <i class="fas fa-times score-modifier red tooltip" data-tooltip-content="#modifier-deckplays-cardcycle"></i>
+                            {{else if eq .Modifier 6}}
+                                <i class="fas fa-times score-modifier red tooltip" data-tooltip-content="#modifier-emptyclues-cardcycle"></i>
+                            {{else if eq .Modifier 7}}
+                                <i class="fas fa-times score-modifier red tooltip" data-tooltip-content="#modifier-deckplays-emptyclues-cardcycle"></i>
                             {{end}}
                         </td>
                     </tr>

@@ -168,6 +168,11 @@ export default class Deck extends graphics.Group {
             content += '</li>';
         }
 
+        if (globals.cardcycle) {
+            content += '<li><span class="game-tooltips-icon"><i class="fas fa-sync-alt"></i></span>';
+            content += '&nbsp; Card Cycling</li>';
+        }
+
         if (globals.speedrun) {
             content += '<li><span class="game-tooltips-icon"><i class="fas fa-running"></i></span>';
             content += '&nbsp; Speedrun</li>';

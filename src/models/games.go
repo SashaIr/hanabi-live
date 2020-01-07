@@ -19,6 +19,7 @@ type GameRow struct {
 	Timed                bool
 	TimeBase             int
 	TimePerTurn          int
+	CardCycle            bool
 	DeckPlays            bool
 	Speedrun             bool
 	EmptyClues           bool
@@ -90,6 +91,7 @@ func (*Games) Insert(gameRow GameRow) (int, error) {
 		gameRow.Timed,
 		gameRow.TimeBase,
 		gameRow.TimePerTurn,
+		gameRow.CardCycle,
 		gameRow.Speedrun,
 		gameRow.DeckPlays,
 		gameRow.EmptyClues,
@@ -361,6 +363,7 @@ type Options struct {
 	Timed                bool
 	BaseTime             int
 	TimePerTurn          int
+	CardCycle            bool
 	Speedrun             bool
 	DeckPlays            bool
 	EmptyClues           bool
@@ -386,6 +389,7 @@ func (*Games) GetOptions(databaseID int) (Options, error) {
 		&options.Timed,
 		&options.BaseTime,
 		&options.TimePerTurn,
+		&options.CardCycle,
 		&options.Speedrun,
 		&options.DeckPlays,
 		&options.EmptyClues,
