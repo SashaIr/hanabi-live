@@ -138,7 +138,7 @@ func websocketConnect(ms *melody.Session) {
 
 	// Send them the message(s) of the day
 	msg := "Find teammates and discuss strategy in the "
-	msg += "<a href=\"https://discord.gg/FADvkJp\" target=\"_blank\" rel=\"noopener noreferrer\">"
+	msg += "<a href=\"https://discord.gg/sQGMnRu\" target=\"_blank\" rel=\"noopener noreferrer\">"
 	msg += "Hanabi Discord chat</a>."
 	s.NotifyChat(msg, "", false, true, time.Now(), "lobby")
 

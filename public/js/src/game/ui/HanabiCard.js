@@ -699,7 +699,7 @@ export default class HanabiCard extends graphics.Group {
         // However, if we use "globals.elements.discardStacks.get(suit).moveToTop()" like we do in
         // the "animateToPlayStacks()" function,
         // then the discard stacks will not be arranged in the correct order
-        // Thus, move all of the discord piles to the top in order so that they will be properly
+        // Thus, move all of the discard piles to the top in order so that they will be properly
         // overlapping (the bottom-most stack should have priority over the top)
         for (const stack of globals.elements.discardStacks) {
             // Since "discardStacks" is a Map(),

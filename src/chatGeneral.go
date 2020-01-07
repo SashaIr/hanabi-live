@@ -55,7 +55,7 @@ func chatHelp(s *Session, d *CommandData, t *Table) {
 
 // /discoard
 func chatDiscord(s *Session, d *CommandData, t *Table) {
-	msg := "Join the Hanabi Discord server: https://discord.gg/FADvkJp"
+	msg := "Join the Hanabi Discord server: https://discord.gg/sQGMnRu"
 	chatServerSend(msg, d.Room)
 }
 

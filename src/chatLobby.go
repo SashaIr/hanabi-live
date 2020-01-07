@@ -17,8 +17,8 @@ func chatHere(s *Session, d *CommandData, t *Table) {
 
 	// Check to see if enough time has passed from the last @here
 	msg := ""
-	if time.Since(discordLastAtHere) < discordAtHereTimeout {
-		timeCanPingAgain := discordLastAtHere.Add(discordAtHereTimeout)
+	if time.Since(LastAtHere) < AtHereTimeout {
+		timeCanPingAgain := LastAtHere.Add(AtHereTimeout)
 		minutesLeft := int(math.Ceil(time.Until(timeCanPingAgain).Minutes()))
 		msg += "In order to prevent spam, "
 		msg += "you need to wait another " + strconv.Itoa(minutesLeft) + " minutes "
@@ -42,8 +42,8 @@ func chatHere(s *Session, d *CommandData, t *Table) {
 
 		// Record the time of the "@here" ping so that we can enforce the time limit
 		if !test {
-			discordLastAtHere = time.Now()
-			if err := db.DiscordMetadata.Put("last_at_here", discordLastAtHere.Format(time.RFC3339)); err != nil {
+			LastAtHere = time.Now()
+			if err := db.Metadata.Put("last_at_here", LastAtHere.Format(time.RFC3339)); err != nil {
 				log.Error("Failed to update the database for the last @here:", err)
 				return
 			}
@@ -52,7 +52,7 @@ func chatHere(s *Session, d *CommandData, t *Table) {
 	if len(waitingList) > 0 {
 		msg += "\n" + waitingListGetNum() + ":\n"
 		for _, waiter := range waitingList {
-			msg += waiter.DiscordMention + ", "
+			msg += waiter.Mention + ", "
 		}
 		msg = strings.TrimSuffix(msg, ", ")
 	}
@@ -68,7 +68,7 @@ func chatLast(s *Session, d *CommandData, t *Table) {
 	}
 
 	// Get the time elapsed since the last @here
-	elapsedMinutes := int(math.Ceil(time.Since(discordLastAtHere).Minutes()))
+	elapsedMinutes := int(math.Ceil(time.Since(LastAtHere).Minutes()))
 	msg := "It has been " + strconv.Itoa(elapsedMinutes) + " minutes since the last mass ping."
 	chatServerSend(msg, d.Room)
 }
