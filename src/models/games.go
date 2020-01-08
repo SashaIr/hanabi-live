@@ -44,6 +44,7 @@ func (*Games) Insert(gameRow GameRow) (int, error) {
 			timed,
 			time_base,
 			time_per_turn,
+			card_cycle,
 			speedrun,
 			deck_plays,
 			empty_clues,
@@ -56,6 +57,7 @@ func (*Games) Insert(gameRow GameRow) (int, error) {
 			datetime_started,
 			datetime_finished
 		) VALUES (
+			?,
 			?,
 			?,
 			?,
