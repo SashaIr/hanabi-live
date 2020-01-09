@@ -100,7 +100,7 @@ export const draw = () => {
         `;
     }
 
-    if (globals.game.cardcycle) {
+    if (globals.game.cardCycle) {
         html += '<li><i id="lobby-pregame-options-card-cycle" class="fas fa-sync-alt" ';
         html += 'style="position: relative; left: 0.2em;" ';
         html += 'data-tooltip-content="#pregame-tooltip-card-cycle"></i></li>';

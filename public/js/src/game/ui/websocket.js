@@ -203,7 +203,7 @@ commands.init = (data) => {
     globals.timed = data.timed;
     globals.baseTime = data.baseTime;
     globals.timePerTurn = data.timePerTurn;
-    globals.cardcycle = data.cardcycle;
+    globals.cardCycle = data.cardCycle;
     globals.speedrun = data.speedrun;
     globals.deckPlays = data.deckPlays;
     globals.emptyClues = data.emptyClues;

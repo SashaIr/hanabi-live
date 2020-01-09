@@ -318,7 +318,7 @@ func (us *UserStats) UpdateAll(highestVariantID int) error {
 				overallBestScoreMod := 0
 
 				// Go through each modifier
-				for modifier := 0; modifier <= 3; modifier++ {
+				for modifier := 0; modifier <= 7; modifier++ {
 					// Get the score for this player count and modifier
 					var bestScore int
 					SQLString := `
@@ -334,21 +334,49 @@ func (us *UserStats) UpdateAll(highestVariantID int) error {
 						SQLString += `
 							AND games.deck_plays = 0
 							AND games.empty_clues = 0
+							AND games.card_cycle = 0
 						`
 					} else if modifier == 1 {
 						SQLString += `
 							AND games.deck_plays = 1
 							AND games.empty_clues = 0
+							AND games.card_cycle = 0
 						`
 					} else if modifier == 2 {
 						SQLString += `
 							AND games.deck_plays = 0
 							AND games.empty_clues = 1
+							AND games.card_cycle = 0
 						`
 					} else if modifier == 3 {
 						SQLString += `
 							AND games.deck_plays = 1
 							AND games.empty_clues = 1
+							AND games.card_cycle = 0
+							`
+					} else if modifier == 4 {
+						SQLString += `
+							AND games.deck_plays = 0
+							AND games.empty_clues = 0
+							AND games.card_cycle = 1
+						`
+					} else if modifier == 5 {
+						SQLString += `
+							AND games.deck_plays = 1
+							AND games.empty_clues = 0
+							AND games.card_cycle = 1
+						`
+					} else if modifier == 6 {
+						SQLString += `
+							AND games.deck_plays = 0
+							AND games.empty_clues = 1
+							AND games.card_cycle = 1
+						`
+					} else if modifier == 7 {
+						SQLString += `
+							AND games.deck_plays = 1
+							AND games.empty_clues = 1
+							AND games.card_cycle = 1
 						`
 					}
 					if err := db.QueryRow(

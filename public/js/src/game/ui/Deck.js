@@ -168,7 +168,7 @@ export default class Deck extends graphics.Group {
             content += '</li>';
         }
 
-        if (globals.cardcycle) {
+        if (globals.cardCycle) {
             content += '<li><span class="game-tooltips-icon"><i class="fas fa-sync-alt"></i></span>';
             content += '&nbsp; Card Cycling</li>';
         }

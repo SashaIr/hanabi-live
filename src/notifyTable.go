@@ -50,7 +50,7 @@ func (t *Table) NotifyPlayerChange() {
 			Timed                bool                 `json:"timed"`
 			BaseTime             int                  `json:"baseTime"`
 			TimePerTurn          int                  `json:"timePerTurn"`
-			CardCycle            bool                 `json:"cardcycle"`
+			CardCycle            bool                 `json:"cardCycle"`
 			Speedrun             bool                 `json:"speedrun"`
 			DeckPlays            bool                 `json:"deckPlays"`
 			EmptyClues           bool                 `json:"emptyClues"`

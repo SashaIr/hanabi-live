@@ -380,6 +380,7 @@ func (*Games) GetOptions(databaseID int) (Options, error) {
 			timed,
 			time_base,
 			time_per_turn,
+			card_cycle
 			speedrun,
 			deck_plays,
 			empty_clues,
