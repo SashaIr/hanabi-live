@@ -196,7 +196,7 @@ CREATE TABLE discord_metadata (
     value  NVARCHAR(100)  NOT NULL
 );
 CREATE INDEX discord_metadata_index_name ON discord_metadata (name);
-INSERT INTO discord_metadata (name, value) VALUES ('last_at_here', '2006-01-02T15:04:05Z07:00');
+INSERT INTO discord_metadata (name, value) VALUES ('last_at_here', '2002-10-02T10:00:00-05:00');
 /* The "last_at_here" value is stored as a RFC3339 string */
 
 DROP TABLE IF EXISTS discord_waiters;
