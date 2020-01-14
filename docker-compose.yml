@@ -1,0 +1,27 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "8000:80"
+    depends_on:
+      - db
+    volumes:
+      - .:/repo
+    links:
+      - db  
+  db:
+    image: mariadb
+    restart: always
+    environment:
+      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
+      MYSQL_USER: "hanabiuser"
+      MYSQL_PASSWORD: "1234567890"
+      MYSQL_DATABASE: "hanabi"
+    expose:
+      - 3306
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./install/database_schema.sql:/docker-entrypoint-initdb.d/init.sql
