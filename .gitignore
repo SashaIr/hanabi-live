@@ -40,5 +40,5 @@ hanabi-live
 .glide/
 
 # Some Go stuff
-src/go.mod
-src/go.sum
+src/*.mod
+src/*.sum
