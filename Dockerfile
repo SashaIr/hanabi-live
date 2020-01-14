@@ -14,11 +14,15 @@ RUN mkdir -p "$GOPATH/src/github.com/Zamiell/" /repo
 RUN cd "$GOPATH/src/github.com/Zamiell/" && ln -s /repo hanabi-live
 WORKDIR "$GOPATH/src/github.com/Zamiell/hanabi-live"
 
+# Copy local files in container
+COPY . .
+
+# Build files
+RUN ./install/install_dependencies.sh
+
 # Expose the application on port 8080
 EXPOSE 80
 
-VOLUME /repo
-
 STOPSIGNAL SIGINT
 
-CMD ./install/install_dependencies.sh && ./run.sh
+CMD ./run.sh
