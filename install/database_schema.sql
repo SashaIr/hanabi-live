@@ -2,6 +2,14 @@
     Setting up the database is accomplished in the "install_database_schema.sh" script
 */
 
+CREATE DATABASE hanabi;
+
+CREATE USER hanabiuser@'%' IDENTIFIED BY '12345678';
+GRANT ALL PRIVILEGES ON hanabi . * TO hanabiuser@'%';
+FLUSH PRIVILEGES;
+
+USE hanabi;
+
 /*
     We have to disable foreign key checks so that we can drop the tables;
     this will only disable it for the current session

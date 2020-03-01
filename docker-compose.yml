@@ -4,19 +4,24 @@ services:
   web:
     build: .
     ports:
-      - "8000:80"
+      - "8006:80"
+    environment:
+      - DB_HOST=db
+      - DB_USER=hanabiuser
+      - DB_PASS=12345678
+      - DB_NAME=hanabi
     depends_on:
       - db
     links:
-      - db  
+      - db
   db:
     image: mariadb
     restart: always
     environment:
-      MYSQL_RANDOM_ROOT_PASSWORD: "yes"
-      MYSQL_USER: "hanabiuser"
-      MYSQL_PASSWORD: "1234567890"
-      MYSQL_DATABASE: "hanabi"
+      - MYSQL_RANDOM_ROOT_PASSWORD=yes
+      - MYSQL_USER=hanabiuser
+      - MYSQL_PASSWORD=12345678
+      - MYSQL_DATABASE=hanabi
     expose:
       - 3306
     ports:
