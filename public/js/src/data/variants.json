@@ -63,6 +63,24 @@
         "spacing": true
     },
 
+    "Gray (6 Suits)": {
+        "id": 41,
+        "suits": ["Red", "Yellow", "Green", "Blue", "Purple", "Gray"]
+    },
+    "Gray (5 Suits)": {
+        "id": 42,
+        "suits": ["Red", "Yellow", "Green", "Blue", "Gray"]
+    },
+    "Gray (4 Suits)": {
+        "id": 46,
+        "suits": ["Red", "Yellow", "Blue", "Gray"]
+    },
+    "Gray (3 Suits)": {
+        "id": 47,
+        "suits": ["Red", "Blue", "Gray"],
+        "spacing": true
+    },
+
     "Dual-Color (6 Suits)": {
         "id": 4,
         "suits": ["Green D", "Purple D", "Navy D", "Orange D", "Tan D", "Mahogany D"],

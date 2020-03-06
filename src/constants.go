@@ -81,6 +81,6 @@ const (
 	initFail = "Failed to initialize the game. Please contact an administrator."
 
 	// Discord emotes
-	pogChamp   = "<:PogChamp:254683883033853954>"
-	bibleThump = "<:BibleThump:254683882601840641>"
+	open_mouth   = "<:open_mouth:685452458054778884>"
+	slight_frown = "<:slight_frown:664119411162218530>"
 )

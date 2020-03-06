@@ -385,9 +385,9 @@ func (g *Game) AnnounceGameResult() {
 	} else {
 		msg += " with a score of " + strconv.Itoa(g.Score) + ". "
 		if g.Score == variants[g.Options.Variant].MaxScore {
-			msg += pogChamp + " "
+			msg += open_mouth + " "
 		} else if g.Score == 0 {
-			msg += bibleThump + " "
+			msg += slight_frown + " "
 		}
 	}
 	msg += "(id: " + strconv.Itoa(g.ID) + ", seed: " + g.Seed + ")"
