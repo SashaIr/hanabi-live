@@ -233,10 +233,10 @@ Hanabi Live is programmed by Hanabi enthusiasts who have played thousands of gam
 ## Full Variant Listing
 
 * Normal
-  * No Variant
-  * Six Suits
-  * Four Suits
-  * Three Suits
+  * Normal (6 Suits)
+  * Normal (5 Suits)
+  * Normal (4 Suits)
+  * Normal (3 Suits)
 * Black
   * Black (6 Suits)
   * Black (5 Suits)

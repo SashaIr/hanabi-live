@@ -2,11 +2,13 @@
     Setting up the database is accomplished in the "install_database_schema.sh" script
 */
 
+/*
 CREATE DATABASE hanabi;
 
 CREATE USER hanabiuser@'%' IDENTIFIED BY '12345678';
 GRANT ALL PRIVILEGES ON hanabi . * TO hanabiuser@'%';
 FLUSH PRIVILEGES;
+*/
 
 USE hanabi;
 

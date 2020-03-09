@@ -1277,11 +1277,11 @@ var show_clue_match = function(target, clue, show_neg) {
 };
 
 var suit_colors = [
-	"#0044cc",
-	"#00cc00",
-	"#ccaa22",
-	"#aa0000",
-	"#6600cc",
+	"#ff0000",
+	"#ffff00",
+	"#02ec00",
+	"#0037ff",
+	"#ffffff",
 	"#111111"
 ];
 
@@ -2795,11 +2795,11 @@ function show_loading() {
 show_loading();
 
 var suit_names = [
-	"Blue",
-	"Green",
-	"Yellow",
 	"Red",
-	"Purple",
+	"Yellow",
+	"Green",
+	"Blue",
+	"White",
 	"Black"
 ];
 

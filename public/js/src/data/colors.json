@@ -5,6 +5,7 @@
     "Blue": { "fill": "#0037ff" },
     "Purple": { "fill": "#6600cc" },
     "White": { "fill": "#ffffff" },
+    
     "Rainbow": {
         "fill": "gradient",
         "fillColorStops": [0, "#ff0000", 0.25, "#ffff00", 0.5, "#02ec00", 0.75, "#0037ff", 1, "#ffffff"]

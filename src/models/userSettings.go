@@ -36,7 +36,7 @@ var (
 		SendTurnSound:                 true,
 		SendTimerSound:                true,
 		Volume:                        50,
-		CreateTableVariant:            "No Variant",
+		CreateTableVariant:            "Normal (5 Suits)",
 		CreateTableBaseTimeMinutes:    2,
 		CreateTableTimePerTurnSeconds: 20,
 	}

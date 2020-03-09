@@ -8,8 +8,8 @@ import (
 var (
 	fastestTimes             = make(map[string][]int)
 	officialSpeedrunVariants = []string{
-		"No Variant",
-		"Six Suits",
+		"Normal (5 Suits)",
+		"Normal (6 Suits)",
 		"Black (6 Suits)",
 		"Rainbow (6 Suits)",
 	}

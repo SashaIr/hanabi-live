@@ -273,7 +273,7 @@
     ],
     /*
         Equal to the type of variant
-        Use "No Variant" for the base game
+        Use "Normal (5 Suits)" for the base game
         A full list of variants can be found here:
         https://github.com/Zamiell/hanabi-live/blob/master/docs/VARIANTS.md#full-variant-listing
     */

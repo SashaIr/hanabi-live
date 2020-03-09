@@ -6,42 +6,34 @@
     "Green": { "pip": "green" },
     "Teal": { "pip": "flower" },
     "Blue": { "pip": "blue" },
-    "Purple": { "pip": "crescent" },
+    "Purple": { "pip": "purple" },
     "White": { "pip": "white" },
-    "Black": { "oneOfEach": true, "pip": "spade" },
+    "Black": { "abbreviation": "K", "oneOfEach": true, "pip": "black" },
+
+    "Colorless": { "clueColors": [], "fill": "#dddddd", "pip": "circle" },
+    "Colorless 1OE": { "clueColors": [], "fill": "#dddddd", "oneOfEach": true, "pip": "circle" },
 
     "Rainbow": {
+        "abbreviation": "M",
         "oneOfEach": true,
         "fill": "rainbow",
         "fillColors": ["#ffffff", "#0037ff", "#02ec00", "#ffff00", "#ff0000"],
         "pip": "rainbow"
     },
     
-    "Multi": {
-        "abbreviation": "M",
+    "Multicolor": {
         "allClueColors": true,
         "fill": "rainbow",
-        "fillColors": ["#0044cc", "#00cc00", "#ccaa22", "#aa0000", "#6600cc"],
+        "fillColors": ["#ffffff", "#0037ff", "#02ec00", "#ffff00", "#ff0000"],
         "pip": "rainbow"
     },
 
-    "Colorless": { "clueColors": [], "fill": "#d9d9d9", "pip": "circle" },
-
-    "Dark Rainbow": {
-        "abbreviation": "M",
+    "Multicolor 1OE": {
         "allClueColors": true,
         "fill": "rainbow",
-        "fillColors": ["#000555", "#005505", "#555500", "#5f0000", "#550055"],
+        "fillColors": ["#ffffff", "#0037ff", "#02ec00", "#ffff00", "#ff0000"],
         "oneOfEach": true,
         "pip": "rainbow"
-    },
-
-    "Gray": {
-        "abbreviation": "A",
-        "clueColors": [],
-        "fill": "#cccccc",
-        "oneOfEach": true,
-        "pip": "circle"
     },
 
     "Green D": { "clueColors": ["Blue", "Yellow"], "name": "Green", "pip": "diamond" },
@@ -55,5 +47,5 @@
     "Lime D": { "clueColors": ["Green", "Yellow"], "fill": "#80c000", "name": "Lime", "pip": "club" },
     "Orange D2": { "clueColors": ["Yellow", "Red"], "fill": "#ff8800", "name": "Orange", "pip": "star" },
     "Cardinal D": { "clueColors": ["Red", "Purple"], "fill": "#810735", "name": "Cardinal", "pip": "heart" },
-    "Indigo D": { "clueColors": ["Purple", "Blue"], "fill": "#1a0082", "name": "Indigo", "pip": "crescent" },
+    "Indigo D": { "clueColors": ["Purple", "Blue"], "fill": "#1a0082", "name": "Indigo", "pip": "crescent" }
 }
