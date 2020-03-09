@@ -148,11 +148,11 @@
         "spacing": true
     },
 
-    "Colorless & Multicolor (6 Suits)": {
+    "Colorless & Rainbow (6 Suits)": {
         "id": 96,
         "suits": ["Red", "Yellow", "Green", "Blue", "Colorless", "Multicolor"]
     },
-    "Colorless & Multicolor (5 Suits)": {
+    "Colorless & Rainbow (5 Suits)": {
         "id": 95,
         "suits": ["Red", "Yellow", "Blue", "Colorless", "Multicolor"],
         "spacing": true
