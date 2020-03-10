@@ -110,6 +110,8 @@ const checkNoteIdentity = (card, note, fullNote) => {
     card.noteChopMoved = (
         note === 'cm'
         || fullNote.includes('[cm]')
+        || note === 'f'
+        || fullNote.includes('[f]')
     );
 
     // Second, check the contents of the note right of the right-most pipe
