@@ -5,14 +5,19 @@
     "Blue": { "fill": "#0037ff" },
     "Purple": { "fill": "#6600cc" },
     "White": { "fill": "#ffffff" },
+    "Black": { "abbreviation": "K", "fill": "#111111" },
     
     "Rainbow": {
         "fill": "gradient",
         "fillColorStops": [0, "#ff0000", 0.25, "#ffff00", 0.5, "#02ec00", 0.75, "#0037ff", 1, "#ffffff"]
     },
 
-    "Teal": { "fill": "#00cccc" },
-    "Black": { "abbreviation": "K", "fill": "#111111" },
-    "Pink": { "abbreviation": "I", "fill": "#ff69b4" },
-    "Brown": { "abbreviation": "N", "fill": "#654321" }
+    "Pink": { "fill": "#ffc0cb" },
+    "Orange": { "fill": "#ff7f00" },
+    "Lime": { "fill": "#ddff00" },
+    "Cyan": { "fill": "#00cccc" },
+    "Sky": { "fill": "#87ceeb" },
+    "Indigo": { "fill": "#7700ff" },
+    "Lilac": { "fill": "#cc88ff" },
+    "Sand": { "fill": "#ffff99" }
 }
