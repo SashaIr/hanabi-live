@@ -474,7 +474,7 @@ export default function drawPip(ctx, suit, shadow, deckBack) {
     if (isTextShape) {
         ctx.fillText(ctx.text, ctx.textX, ctx.textY);
     } else {
-        ctx.fill();
+        ctx.fill("evenodd");
     }
 
     // Draw a black border around the shape
