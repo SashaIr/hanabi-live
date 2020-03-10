@@ -220,7 +220,7 @@ Hanabi Live is programmed by Hanabi enthusiasts who have played thousands of gam
 * This variant was invented by Jack Gurev's group.
 * When players give a clue, they point at the cards clued, but say "quack" instead of a color or number.
 
-### Throw It in a Hole
+### Hidden Board
 
 * This variant was invented by Jack Gurev's group.
 * When players play a card, they do not flip it over like normal but instead place it face down in the center of the table.
@@ -583,8 +583,8 @@ Hanabi Live is programmed by Hanabi enthusiasts who have played thousands of gam
   * Duck (5 Suits)
   * Duck (4 Suits)
   * Duck (3 Suits)
-* Throw It in a Hole
-  * Throw It in a Hole (6 Suits)
-  * Throw It in a Hole (5 Suits)
-  * Throw It in a Hole (4 Suits)
-  * Throw It in a Hole (3 Suits)
+* Hidden Board
+  * Hidden Board (6 Suits)
+  * Hidden Board (5 Suits)
+  * Hidden Board (4 Suits)
+  * Hidden Board (3 Suits)

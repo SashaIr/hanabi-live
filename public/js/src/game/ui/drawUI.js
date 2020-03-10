@@ -384,9 +384,9 @@ const drawPlayStacksAndDiscardStacks = () => {
         }
     }
 
-    // Make the invisible "hole" play stack for "Throw It in a Hole" variants
+    // Make the invisible "hole" play stack for "Hidden Board" variants
     // (centered in the middle of the rest of the stacks)
-    if (globals.variant.name.startsWith('Throw It in a Hole')) {
+    if (globals.variant.name.startsWith('Hidden Board')) {
         const playStackX = playStackValues.x + (playStackValues.w / 2) - (cardWidth / 2);
         const playStack = new PlayStack({
             x: playStackX * winW,
@@ -760,7 +760,7 @@ const drawScoreArea = () => {
         x: (labelX + labelSpacing) * winW,
         y: 0.05 * winH,
         fontSize: 0.017 * winH,
-        visible: !globals.variant.name.startsWith('Throw It in a Hole') || globals.replay,
+        visible: !globals.variant.name.startsWith('Hidden Board') || globals.replay,
     });
     globals.elements.scoreArea.add(globals.elements.maxScoreNumberLabel);
 

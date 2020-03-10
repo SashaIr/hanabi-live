@@ -33,16 +33,16 @@
     },
 
     "Black Alternative (6 Suits)": {
-        "id": 216,
+        "id": 916,
         "suits": ["Red", "Yellow", "Green", "Blue", "White", "Rainbow"]
     },
     "Black Alternative (5 Suits)": {
-        "id": 215,
+        "id": 915,
         "suits": ["Red", "Yellow", "Green", "Blue", "Rainbow"],
         "spacing": true
     },
     "Black Alternative (4 Suits)": {
-        "id": 214,
+        "id": 914,
         "suits": ["Red", "Yellow", "Blue", "Rainbow"],
         "spacing": true
     },
@@ -167,5 +167,14 @@
         "id": 205,
         "suits": ["Teal D", "Lime D", "Orange D2", "Cardinal D", "Indigo D"],
         "showSuitNames": true
+    },
+    
+    "Hidden Board (6 Suits)": {
+        "id": 216,
+        "suits": ["Red", "Yellow", "Green", "Blue", "Purple", "White"]
+    },
+    "Hidden Board (5 Suits)": {
+        "id": 215,
+        "suits": ["Red", "Yellow", "Green", "Blue", "White"]
     }
 }

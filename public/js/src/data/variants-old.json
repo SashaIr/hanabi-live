@@ -1333,15 +1333,15 @@
         "spacing": true
     },
 
-    "Throw It in a Hole (6 Suits)": {
+    "Hidden Board (6 Suits)": {
         "id": 279,
         "suits": ["Blue", "Green", "Yellow", "Red", "Purple", "Teal"]
     },
-    "Throw It in a Hole (5 Suits)": {
+    "Hidden Board (5 Suits)": {
         "id": 280,
         "suits": ["Blue", "Green", "Yellow", "Red", "Purple"]
     },
-    "Throw It in a Hole (4 Suits)": {
+    "Hidden Board (4 Suits)": {
         "id": 281,
         "suits": ["Blue", "Green", "Yellow", "Red"]
     }

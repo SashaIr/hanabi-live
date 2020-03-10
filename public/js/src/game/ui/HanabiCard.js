@@ -251,7 +251,7 @@ export default class HanabiCard extends graphics.Group {
         if (
             globals.lobby.settings.realLifeMode
             || globals.speedrun
-            || globals.variant.name.startsWith('Throw It in a Hole')
+            || globals.variant.name.startsWith('Hidden Board')
         ) {
             return;
         }
@@ -587,9 +587,9 @@ export default class HanabiCard extends graphics.Group {
         this.suit = suit;
         this.rank = rank;
 
-        // Played cards are not revealed in the "Throw It in a Hole" variant
+        // Played cards are not revealed in the "Hidden Board" variant
         if (
-            globals.variant.name.startsWith('Throw It in a Hole')
+            globals.variant.name.startsWith('Hidden Board')
             && !globals.replay
             && this.isPlayed
         ) {
@@ -673,7 +673,7 @@ export default class HanabiCard extends graphics.Group {
 
     animateToPlayStacks() {
         // We add a LayoutChild to a PlayStack
-        if (globals.variant.name.startsWith('Throw It in a Hole') && !globals.replay) {
+        if (globals.variant.name.startsWith('Hidden Board') && !globals.replay) {
             const hole = globals.elements.playStacks.get('hole');
             hole.add(this.parent); // The act of adding it will automatically tween the card
 

@@ -29,7 +29,7 @@ export default class PlayStack extends graphics.Group {
             const scale = lh / node.getHeight();
             const stackBase = node.children[0].rank === constants.STACK_BASE_RANK;
             const opacity = (
-                globals.variant.name.startsWith('Throw It in a Hole')
+                globals.variant.name.startsWith('Hidden Board')
                 && !globals.replay
                 // We want the stack bases to always be visible
                 && !stackBase

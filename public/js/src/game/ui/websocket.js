@@ -145,8 +145,8 @@ commands.gameOver = () => {
     globals.elements.lobbyButtonSmall.hide();
     globals.elements.lobbyButtonBig.show();
 
-    // Turn off the "Throw It in a Hole" UI
-    if (globals.variant.name.startsWith('Throw It in a Hole')) {
+    // Turn off the "Hidden Board" UI
+    if (globals.variant.name.startsWith('Hidden Board')) {
         globals.elements.scoreNumberLabel.setText(globals.score.toString());
         globals.elements.maxScoreNumberLabel.show();
     }

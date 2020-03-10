@@ -219,7 +219,7 @@ func (p *GamePlayer) PlayCard(g *Game, c *Card) bool {
 		c.Failed = true
 		g.Strikes++
 
-		if strings.HasPrefix(g.Options.Variant, "Throw It in a Hole") {
+		if strings.HasPrefix(g.Options.Variant, "Hidden Board") {
 			// Pretend like this card successfully played
 			if c.Touched {
 				// Mark that the blind-play streak has ended
@@ -282,7 +282,7 @@ func (p *GamePlayer) PlayCard(g *Game, c *Card) bool {
 
 	// Send the "message" about the play
 	text := p.Name + " plays "
-	if strings.HasPrefix(g.Options.Variant, "Throw It in a Hole") {
+	if strings.HasPrefix(g.Options.Variant, "Hidden Board") {
 		text += "a card"
 	} else {
 		text += c.Name(g)
@@ -323,7 +323,7 @@ func (p *GamePlayer) PlayCard(g *Game, c *Card) bool {
 
 	if extraClue {
 		// Some variants do not grant an extra clue when successfully playing a 5
-		if !strings.HasPrefix(g.Options.Variant, "Throw It in a Hole") {
+		if !strings.HasPrefix(g.Options.Variant, "Hidden Board") {
 			g.ClueTokens++
 		}
 
@@ -378,7 +378,7 @@ func (p *GamePlayer) DiscardCard(g *Game, c *Card) bool {
 
 	text := p.Name + " "
 	if c.Failed {
-		if strings.HasPrefix(g.Options.Variant, "Throw It in a Hole") {
+		if strings.HasPrefix(g.Options.Variant, "Hidden Board") {
 			text += "plays"
 		} else {
 			text += "fails to play"
@@ -387,7 +387,7 @@ func (p *GamePlayer) DiscardCard(g *Game, c *Card) bool {
 		text += "discards"
 	}
 	text += " "
-	if strings.HasPrefix(g.Options.Variant, "Throw It in a Hole") && c.Failed {
+	if strings.HasPrefix(g.Options.Variant, "Hidden Board") && c.Failed {
 		text += "a card"
 	} else {
 		text += c.Name(g)
@@ -588,7 +588,7 @@ func (p *GamePlayer) GetRightPlayer(g *Game) int {
 // This code mirrors the "morph()" client-side function
 func (p *GamePlayer) CheckSurprise(g *Game, c *Card) {
 	// Disable the surprise sound in certain variants
-	if strings.HasPrefix(g.Options.Variant, "Throw It in a Hole") {
+	if strings.HasPrefix(g.Options.Variant, "Hidden Board") {
 		return
 	}
 

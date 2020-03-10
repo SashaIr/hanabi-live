@@ -100,7 +100,7 @@ export const getMinEfficiency = () => {
     */
     const minEfficiencyNumerator = 5 * globals.variant.suits.length;
     let numSuits = globals.variant.suits.length;
-    if (globals.variant.name.startsWith('Throw It in a Hole')) {
+    if (globals.variant.name.startsWith('Hidden Board')) {
         // Players do not gain a clue after playing a 5 in this variant
         numSuits = 0;
     }
@@ -108,7 +108,7 @@ export const getMinEfficiency = () => {
     if (numPlayers >= 5) {
         unusableClues = 2;
     }
-    if (globals.variant.name.startsWith('Throw It in a Hole')) {
+    if (globals.variant.name.startsWith('Hidden Board')) {
         // Players do not gain a clue after playing a 5 in this variant
         unusableClues = 0;
     }

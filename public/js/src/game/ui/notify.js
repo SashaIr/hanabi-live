@@ -143,8 +143,8 @@ commands.deckOrder = () => {
 };
 
 commands.discard = (data) => {
-    // In "Throw It in a Hole" variants, convert misplays to real plays
-    if (globals.variant.name.startsWith('Throw It in a Hole') && !globals.replay && data.failed) {
+    // In "Hidden Board" variants, convert misplays to real plays
+    if (globals.variant.name.startsWith('Hidden Board') && !globals.replay && data.failed) {
         commands.play(data);
         return;
     }
@@ -369,7 +369,7 @@ commands.status = (data) => {
     // Update the score (in the bottom-right-hand corner)
     const scoreLabel = globals.elements.scoreNumberLabel;
     scoreLabel.setText(globals.score.toString());
-    if (globals.variant.name.startsWith('Throw It in a Hole') && !globals.replay) {
+    if (globals.variant.name.startsWith('Hidden Board') && !globals.replay) {
         scoreLabel.setText('?');
     }
 
@@ -390,7 +390,7 @@ commands.status = (data) => {
 };
 
 commands.strike = (data) => {
-    if (globals.variant.name.startsWith('Throw It in a Hole') && !globals.replay) {
+    if (globals.variant.name.startsWith('Hidden Board') && !globals.replay) {
         return;
     }
 

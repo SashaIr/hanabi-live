@@ -4,6 +4,7 @@ Per creare un nuovo db (visto che mariadb fa schifo) bisogna prima creare il con
 ed eseguire a mano
 ```
 mysql < /docker-entrypoint-initdb.d/init.sql
+mysql -u hanabiuser -p12345678 < /docker-entrypoint-initdb.d/init.sql
 ```
 
 Il sito invece dovrebbe molto in teoria partire da solo quando crei il container, ma deve essere
