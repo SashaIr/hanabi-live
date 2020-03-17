@@ -10,9 +10,10 @@
     "Black": { "abbreviation": "K", "oneOfEach": true, "pip": "black" },
 
     "Colorless": { "clueColors": [], "fill": "#dddddd", "pip": "circle" },
-    "Colorless 1OE": { "clueColors": [], "fill": "#dddddd", "oneOfEach": true, "pip": "circle" },
+    "Colorless 1OE": { "name": "Colorless", "clueColors": [], "fill": "#dddddd", "oneOfEach": true, "pip": "circle" },
 
-    "Rainbow": {
+    "Black Alternative": {
+        "name": "Rainbow",
         "abbreviation": "M",
         "oneOfEach": true,
         "fill": "rainbow",
@@ -20,14 +21,15 @@
         "pip": "rainbow"
     },
     
-    "Multicolor": {
+    "Rainbow": {
         "allClueColors": true,
         "fill": "rainbow",
         "fillColors": ["#ffffff", "#0037ff", "#02ec00", "#ffff00", "#ff0000"],
         "pip": "rainbow"
     },
 
-    "Multicolor 1OE": {
+    "Rainbow 1OE": {
+        "name": "Rainbow",
         "allClueColors": true,
         "fill": "rainbow",
         "fillColors": ["#ffffff", "#0037ff", "#02ec00", "#ffff00", "#ff0000"],
