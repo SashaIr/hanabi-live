@@ -7,8 +7,8 @@ type Options struct {
 	Timed                bool
 	BaseTime             int
 	TimePerTurn          int
-	CardCycle            bool
 	Speedrun             bool
+	CardCycle            bool
 	DeckPlays            bool
 	EmptyClues           bool
 	CharacterAssignments bool

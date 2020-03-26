@@ -12,7 +12,7 @@ import (
 // This is only called in situations where the game has not started yet
 func (t *Table) NotifyPlayerChange() {
 	if t.Running {
-		log.Error("The \"NotifyPlayerChange()\" function was called on a game that has already started.")
+		logger.Error("The \"NotifyPlayerChange()\" function was called on a game that has already started.")
 		return
 	}
 
@@ -23,11 +23,11 @@ func (t *Table) NotifyPlayerChange() {
 
 		// First, make the array that contains information about all of the players in the game
 		type GamePlayerMessage struct {
-			Index   int    `json:"index"`
-			Name    string `json:"name"`
-			You     bool   `json:"you"`
-			Present bool   `json:"present"`
-			Stats   Stats  `json:"stats"`
+			Index   int          `json:"index"`
+			Name    string       `json:"name"`
+			You     bool         `json:"you"`
+			Present bool         `json:"present"`
+			Stats   PregameStats `json:"stats"`
 		}
 		gamePlayers := make([]*GamePlayerMessage, 0)
 		for j, p2 := range t.Players {
@@ -44,14 +44,13 @@ func (t *Table) NotifyPlayerChange() {
 		// Second, send information about the game and the players in one big message
 		type GameMessage struct {
 			Name                 string               `json:"name"`
-			Running              bool                 `json:"running"`
 			Players              []*GamePlayerMessage `json:"players"`
 			Variant              string               `json:"variant"`
 			Timed                bool                 `json:"timed"`
 			BaseTime             int                  `json:"baseTime"`
 			TimePerTurn          int                  `json:"timePerTurn"`
-			CardCycle            bool                 `json:"cardCycle"`
 			Speedrun             bool                 `json:"speedrun"`
+			CardCycle            bool                 `json:"cardCycle"`
 			DeckPlays            bool                 `json:"deckPlays"`
 			EmptyClues           bool                 `json:"emptyClues"`
 			CharacterAssignments bool                 `json:"characterAssignments"`
@@ -59,14 +58,13 @@ func (t *Table) NotifyPlayerChange() {
 		}
 		p.Session.Emit("game", &GameMessage{
 			Name:                 t.Name,
-			Running:              t.Running,
 			Players:              gamePlayers,
 			Variant:              t.Options.Variant,
 			Timed:                t.Options.Timed,
 			BaseTime:             t.Options.BaseTime,
 			TimePerTurn:          t.Options.TimePerTurn,
-			CardCycle:            t.Options.CardCycle,
 			Speedrun:             t.Options.Speedrun,
+			CardCycle:            t.Options.CardCycle,
 			DeckPlays:            t.Options.DeckPlays,
 			EmptyClues:           t.Options.EmptyClues,
 			CharacterAssignments: t.Options.CharacterAssignments,
@@ -79,7 +77,7 @@ func (t *Table) NotifyPlayerChange() {
 // This is only called in situations where the game has not started yet
 func (t *Table) NotifyTableReady() {
 	if t.Running {
-		log.Error("The \"NotifyTableReady()\" function was called on a game that has already started.")
+		logger.Error("The \"NotifyTableReady()\" function was called on a game that has already started.")
 		return
 	}
 
@@ -111,7 +109,7 @@ func (t *Table) NotifyTableReady() {
 // This is never called in replays
 func (t *Table) NotifyConnected() {
 	if !t.Running {
-		log.Error("The \"NotifyConnected()\" function was called on a game that has not started yet.")
+		logger.Error("The \"NotifyConnected()\" function was called on a game that has not started yet.")
 		return
 	}
 

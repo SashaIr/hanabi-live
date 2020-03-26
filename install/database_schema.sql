@@ -3,16 +3,6 @@
 */
 
 /*
-CREATE DATABASE hanabi;
-
-CREATE USER hanabiuser@'%' IDENTIFIED BY '12345678';
-GRANT ALL PRIVILEGES ON hanabi . * TO hanabiuser@'%';
-FLUSH PRIVILEGES;
-*/
-
-USE hanabi;
-
-/*
     We have to disable foreign key checks so that we can drop the tables;
     this will only disable it for the current session
  */
@@ -37,7 +27,6 @@ DROP TABLE IF EXISTS user_settings;
 CREATE TABLE user_settings (
     user_id                             INT          NOT NULL  PRIMARY KEY,
     /* PRIMARY KEY automatically creates a UNIQUE constraint */
-    send_turn_notify                    BOOLEAN      NOT NULL  DEFAULT 0,
     send_turn_sound                     BOOLEAN      NOT NULL  DEFAULT 1,
     send_timer_sound                    BOOLEAN      NOT NULL  DEFAULT 1,
     show_keldon_UI                      BOOLEAN      NOT NULL  DEFAULT 0,
@@ -48,12 +37,13 @@ CREATE TABLE user_settings (
     volume                              INT          NOT NULL  DEFAULT 50,
     speedrun_preplay                    BOOLEAN      NOT NULL  DEFAULT 0,
     speedrun_mode                       BOOLEAN      NOT NULL  DEFAULT 0,
+    hyphenated_conventions              BOOLEAN      NOT NULL  DEFAULT 0,
     create_table_variant                VARCHAR(50)  NOT NULL  DEFAULT "No Variant",
     create_table_timed                  BOOLEAN      NOT NULL  DEFAULT 0,
     create_table_base_time_minutes      FLOAT        NOT NULL  DEFAULT 2,
     create_table_time_per_turn_seconds  INT          NOT NULL  DEFAULT 20,
-    create_table_card_cycle             BOOLEAN      NOT NULL  DEFAULT 0,
     create_table_speedrun               BOOLEAN      NOT NULL  DEFAULT 0,
+    create_table_card_cycle             BOOLEAN      NOT NULL  DEFAULT 0,
     create_table_deck_plays             BOOLEAN      NOT NULL  DEFAULT 0,
     create_table_empty_clues            BOOLEAN      NOT NULL  DEFAULT 0,
     create_table_character_assignments  BOOLEAN      NOT NULL  DEFAULT 0,
@@ -96,8 +86,8 @@ CREATE TABLE games (
     timed                  BOOLEAN       NOT NULL, /* 0 - not timed, 1 - timed */
     time_base              INT           NOT NULL, /* in seconds */
     time_per_turn          INT           NOT NULL, /* in seconds */
-    card_cycle             BOOLEAN       NOT NULL,
     speedrun               BOOLEAN       NOT NULL,
+    card_cycle             BOOLEAN       NOT NULL,
     deck_plays             BOOLEAN       NOT NULL,
     empty_clues            BOOLEAN       NOT NULL,
     character_assignments  BOOLEAN       NOT NULL,
@@ -206,7 +196,7 @@ CREATE TABLE discord_metadata (
     value  NVARCHAR(100)  NOT NULL
 );
 CREATE INDEX discord_metadata_index_name ON discord_metadata (name);
-INSERT INTO discord_metadata (name, value) VALUES ('last_at_here', '2002-10-02T10:00:00-05:00');
+INSERT INTO discord_metadata (name, value) VALUES ('last_at_here', '2006-01-02T15:04:05Z07:00');
 /* The "last_at_here" value is stored as a RFC3339 string */
 
 DROP TABLE IF EXISTS discord_waiters;

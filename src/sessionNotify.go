@@ -4,8 +4,6 @@ import (
 	"strconv"
 	"strings"
 	"time"
-
-	"github.com/Zamiell/hanabi-live/src/models"
 )
 
 /*
@@ -126,7 +124,7 @@ func (s *Session) NotifyChat(msg string, who string, discord bool, server bool, 
 }
 
 // NotifyGameHistory will send a user a subset of their past games
-func (s *Session) NotifyGameHistory(h []*models.GameHistory, incrementNumGames bool) {
+func (s *Session) NotifyGameHistory(historyListDatabase []*GameHistory, incrementNumGames bool) {
 	type GameHistoryMessage struct {
 		ID                int       `json:"id"`
 		NumPlayers        int       `json:"numPlayers"`
@@ -137,9 +135,9 @@ func (s *Session) NotifyGameHistory(h []*models.GameHistory, incrementNumGames b
 		Variant           string    `json:"variant"`
 		IncrementNumGames bool      `json:"incrementNumGames"`
 	}
-	m := make([]*GameHistoryMessage, 0)
-	for _, g := range h {
-		m = append(m, &GameHistoryMessage{
+	historyList := make([]*GameHistoryMessage, 0)
+	for _, g := range historyListDatabase {
+		historyList = append(historyList, &GameHistoryMessage{
 			ID:                g.ID,
 			NumPlayers:        g.NumPlayers,
 			NumSimilar:        g.NumSimilar,
@@ -150,7 +148,7 @@ func (s *Session) NotifyGameHistory(h []*models.GameHistory, incrementNumGames b
 			IncrementNumGames: incrementNumGames,
 		})
 	}
-	s.Emit("gameHistory", &m)
+	s.Emit("gameHistory", &historyList)
 }
 
 func (s *Session) NotifyTableStart() {
@@ -185,24 +183,9 @@ func (s *Session) NotifyConnected(t *Table) {
 }
 
 // NotifyAction will send someone an "action" message
-// This is sent at the beginning of their turn and lists the allowed actions on this turn
-func (s *Session) NotifyAction(t *Table) {
-	g := t.Game
-
-	type ActionMessage struct {
-		CanClue          bool `json:"canClue"`
-		CanDiscard       bool `json:"canDiscard"`
-		CanBlindPlayDeck bool `json:"canBlindPlayDeck"`
-	}
-	canClue := g.ClueTokens >= 1
-	if strings.HasPrefix(g.Options.Variant, "Clue Starved") {
-		canClue = g.ClueTokens >= 2
-	}
-	s.Emit("action", &ActionMessage{
-		CanClue:          canClue,
-		CanDiscard:       g.ClueTokens != maxClueNum,
-		CanBlindPlayDeck: t.Options.DeckPlays && g.DeckIndex == len(g.Deck)-1,
-	})
+// This is sent at the beginning of their turn to bring up the clue UI
+func (s *Session) NotifyAction() {
+	s.Emit("action", nil)
 }
 
 func (s *Session) NotifyGameAction(a interface{}, t *Table) {
@@ -330,8 +313,8 @@ func (s *Session) NotifyReplayLeader(t *Table, playAnimation bool) {
 	if name == "" {
 		// The leader is not currently present and was not a member of the original game,
 		// so we need to look up their username from the database
-		if v, err := db.Users.GetUsername(t.Owner); err != nil {
-			log.Error("Failed to get the username for user "+strconv.Itoa(t.Owner)+
+		if v, err := models.Users.GetUsername(t.Owner); err != nil {
+			logger.Error("Failed to get the username for user "+strconv.Itoa(t.Owner)+
 				" who is the owner of table:", t.ID)
 			return
 		} else {
@@ -356,9 +339,9 @@ func (s *Session) NotifyNoteList(t *Table) {
 	g := t.Game
 
 	// Get the notes from all the players & spectators
-	notes := make([]models.NoteList, 0)
+	notes := make([]NoteList, 0)
 	for _, p := range g.Players {
-		notes = append(notes, models.NoteList{
+		notes = append(notes, NoteList{
 			ID:    t.Players[p.Index].ID,
 			Name:  p.Name,
 			Notes: p.Notes,
@@ -366,7 +349,7 @@ func (s *Session) NotifyNoteList(t *Table) {
 	}
 	if !t.Replay {
 		for _, sp := range t.Spectators {
-			notes = append(notes, models.NoteList{
+			notes = append(notes, NoteList{
 				ID:    sp.ID,
 				Name:  sp.Name,
 				Notes: sp.Notes,
@@ -376,7 +359,7 @@ func (s *Session) NotifyNoteList(t *Table) {
 
 	// Send it
 	type NoteListMessage struct {
-		Notes []models.NoteList `json:"notes"`
+		Notes []NoteList `json:"notes"`
 	}
 	s.Emit("noteList", &NoteListMessage{
 		Notes: notes,

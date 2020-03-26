@@ -8,17 +8,11 @@ package main
 
 import (
 	"io/ioutil"
-	"path"
-	"regexp"
 	"strconv"
+	"strings"
 	"time"
 
-	"github.com/Zamiell/hanabi-live/src/models"
 	melody "gopkg.in/olahol/melody.v1"
-)
-
-var (
-	versionRegExp = regexp.MustCompile(`module.exports = (.+);`)
 )
 
 func websocketConnect(ms *melody.Session) {
@@ -35,12 +29,12 @@ func websocketConnect(ms *melody.Session) {
 
 	// Disconnect any existing connections with this username
 	if s2, ok := sessions[s.UserID()]; ok {
-		log.Info("Closing existing connection for user \"" + s.Username() + "\".")
+		logger.Info("Closing existing connection for user \"" + s.Username() + "\".")
 		s2.Error("You have logged on from somewhere else, so you have been disconnected here.")
 		if err := s2.Close(); err != nil {
-			log.Error("Attempted to manually close a WebSocket connection, but it failed.")
+			logger.Error("Attempted to manually close a WebSocket connection, but it failed.")
 		} else {
-			log.Info("Successfully terminated a WebSocket connection.")
+			logger.Info("Successfully terminated a WebSocket connection.")
 		}
 
 		// The connection is now closed, but the disconnect event will be fired in another goroutine
@@ -50,47 +44,40 @@ func websocketConnect(ms *melody.Session) {
 
 	// Add the connection to a session map so that we can keep track of all of the connections
 	sessions[s.UserID()] = s
-	log.Info("User \""+s.Username()+"\" connected;", len(sessions), "user(s) now connected.")
+	logger.Info("User \""+s.Username()+"\" connected;", len(sessions), "user(s) now connected.")
 
 	// Get their total number of games played
 	var totalGames int
-	if v, err := db.Games.GetUserNumGames(s.UserID(), true); err != nil {
-		log.Error("Failed to get the number of games played for user \""+s.Username()+"\":", err)
+	if v, err := models.Games.GetUserNumGames(s.UserID(), true); err != nil {
+		logger.Error("Failed to get the number of games played for user \""+s.Username()+"\":", err)
 		return
 	} else {
 		totalGames = v
 	}
 
 	// Get their settings from the database
-	var settings models.Settings
-	if v, err := db.UserSettings.Get(s.UserID()); err != nil {
-		log.Error("Failed to get the settings for user \""+s.Username()+"\":", err)
+	var settings Settings
+	if v, err := models.UserSettings.Get(s.UserID()); err != nil {
+		logger.Error("Failed to get the settings for user \""+s.Username()+"\":", err)
 		return
 	} else {
 		settings = v
 	}
 
 	// Get the version number of the client (which is the number of commits in the repository)
-	versionPath := path.Join(projectPath, "public", "js", "src", "version.js")
-	var versionContents string
+	var versionString string
 	if v, err := ioutil.ReadFile(versionPath); err != nil {
-		log.Error("Failed to read the \""+versionPath+"\" file "+
+		logger.Error("Failed to read the \""+versionPath+"\" file "+
 			"when getting the version for user \""+s.Username()+"\":", err)
 		return
 	} else {
-		versionContents = string(v)
+		versionString = string(v)
+		versionString = strings.TrimSpace(versionString)
 	}
-	match := versionRegExp.FindStringSubmatch(versionContents)
-	if match == nil {
-		log.Error("Failed to parse the \"" + versionPath + "\" file " +
-			"when getting the version for user \"" + s.Username() + "\".")
-		return
-	}
-	versionString := match[1]
 	var version int
 	if v, err := strconv.Atoi(versionString); err != nil {
-		log.Error("Failed to convert \""+versionString+"\" "+
-			"(the output of the \"get_build_number.sh\" script) to a number:", err)
+		logger.Error("Failed to convert \""+versionString+"\" "+
+			"(the contents of the \"version.json\" file) to a number:", err)
 		return
 	} else {
 		version = v
@@ -98,12 +85,12 @@ func websocketConnect(ms *melody.Session) {
 
 	// They have successfully logged in, so send the initial message to the client
 	type HelloMessage struct {
-		Username      string          `json:"username"`
-		TotalGames    int             `json:"totalGames"`
-		FirstTimeUser bool            `json:"firstTimeUser"`
-		Settings      models.Settings `json:"settings"`
-		Version       int             `json:"version"`
-		ShuttingDown  bool            `json:"shuttingDown"`
+		Username      string   `json:"username"`
+		TotalGames    int      `json:"totalGames"`
+		FirstTimeUser bool     `json:"firstTimeUser"`
+		Settings      Settings `json:"settings"`
+		Version       int      `json:"version"`
+		ShuttingDown  bool     `json:"shuttingDown"`
 	}
 	s.Emit("hello", &HelloMessage{
 		// We have to send the username back to the client because they may
@@ -123,7 +110,7 @@ func websocketConnect(ms *melody.Session) {
 		Settings: settings,
 
 		// We send the latest client version number to throw a warning
-		// if a user is running old JavaScript old
+		// if a user is running old JavaScript code
 		Version: version,
 
 		// Also let the user know if the server is currently performing a graceful shutdown
@@ -138,7 +125,7 @@ func websocketConnect(ms *melody.Session) {
 
 	// Send them the message(s) of the day
 	msg := "Find teammates and discuss strategy in the "
-	msg += "<a href=\"https://discord.gg/sQGMnRu\" target=\"_blank\" rel=\"noopener noreferrer\">"
+	msg += "<a href=\"https://discord.gg/FADvkJp\" target=\"_blank\" rel=\"noopener noreferrer\">"
 	msg += "Hanabi Discord chat</a>."
 	s.NotifyChat(msg, "", false, true, time.Now(), "lobby")
 
@@ -158,9 +145,9 @@ func websocketConnect(ms *melody.Session) {
 
 	// Send the user's game history
 	// (only the last 10 games to prevent wasted bandwidth)
-	var history []*models.GameHistory
-	if v, err := db.Games.GetUserHistory(s.UserID(), 0, 10, false); err != nil {
-		log.Error("Failed to get the history for user \""+s.Username()+"\":", err)
+	var history []*GameHistory
+	if v, err := models.Games.GetUserHistory(s.UserID(), 0, 10, false); err != nil {
+		logger.Error("Failed to get the history for user \""+s.Username()+"\":", err)
 		return
 	} else {
 		history = v
@@ -190,7 +177,7 @@ func websocketConnect(ms *melody.Session) {
 			p.Session = s
 
 			// Add the player back to the game
-			log.Info(t.GetName() + "Automatically reattending player \"" + s.Username() + "\".")
+			logger.Info(t.GetName() + "Automatically reattending player \"" + s.Username() + "\".")
 			commandTableReattend(s, &CommandData{
 				TableID: t.ID,
 			})
@@ -212,7 +199,7 @@ func websocketConnect(ms *melody.Session) {
 				delete(t.DisconSpectators, s.UserID())
 
 				// Add the player back to the shared replay
-				log.Info(t.GetName() + "Automatically respectating player \"" + s.Username() + "\".")
+				logger.Info(t.GetName() + "Automatically respectating player \"" + s.Username() + "\".")
 				commandTableSpectate(s, &CommandData{ // This function does not care what their current game and/or status is
 					TableID: t.ID,
 				})

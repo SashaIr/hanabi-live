@@ -13,8 +13,6 @@ package main
 import (
 	"reflect"
 	"strconv"
-
-	"github.com/Zamiell/hanabi-live/src/models"
 )
 
 func commandSetting(s *Session, d *CommandData) {
@@ -27,13 +25,13 @@ func commandSetting(s *Session, d *CommandData) {
 		s.Warning("The settings name must not be blank.")
 		return
 	}
-	settings := reflect.ValueOf(models.Settings{})
+	settings := reflect.ValueOf(Settings{})
 	var fieldType string
 	valid := false
 	for i := 0; i < settings.NumField(); i++ {
 		field := settings.Type().Field(i)
-		fieldTag := string(field.Tag)            // e.g. json:"sendTurnNotify"
-		fieldTag = fieldTag[6 : len(fieldTag)-1] // e.g. sendTurnNotify
+		fieldTag := string(field.Tag)            // e.g. json:"sendTurnSound"
+		fieldTag = fieldTag[6 : len(fieldTag)-1] // e.g. sendTurnSound
 		if fieldTag == d.Name {
 			fieldType = field.Type.String()
 			valid = true
@@ -78,8 +76,8 @@ func commandSetting(s *Session, d *CommandData) {
 		Set
 	*/
 
-	if err := db.UserSettings.Set(s.UserID(), toSnakeCase(d.Name), d.Value); err != nil {
-		log.Error("Failed to set a setting for user \""+s.Username()+"\":", err)
+	if err := models.UserSettings.Set(s.UserID(), toSnakeCase(d.Name), d.Value); err != nil {
+		logger.Error("Failed to set a setting for user \""+s.Username()+"\":", err)
 		s.Error("")
 		return
 	}

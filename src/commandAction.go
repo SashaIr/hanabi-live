@@ -105,42 +105,6 @@ func commandAction(s *Session, d *CommandData) {
 		go t.CheckIdle()
 	}
 
-	// Handle card-reordering
-	if t.Options.CardCycle {// If Card Cycling is enabled
-		if d.Type == 0 {// Only when a player gives a clue
-
-			// Find the chop card
-			chopIndex := g.Players[i].GetChopIndex()
-
-			// We don't need to reorder anything if the chop is slot 1
-			// (the left-most card)
-			if chopIndex != len(p.Hand)-1 {
-				chopCard := p.Hand[chopIndex]
-
-				// Remove the chop card from their hand
-				p.Hand = append(p.Hand[:chopIndex], p.Hand[chopIndex+1:]...)
-
-				// Add it to the end (the left-most position)
-				p.Hand = append(p.Hand, chopCard)
-
-				// Make an array that represents the order of the player's hand
-				handOrder := make([]int, 0)
-				for _, c := range p.Hand {
-					handOrder = append(handOrder, c.Order)
-				}
-
-				// Notify everyone about the reordering
-				g.Actions = append(g.Actions, ActionReorder{
-					Type:      "reorder",
-					Target:    p.Index,
-					HandOrder: handOrder,
-				})
-				t.NotifyAction()
-				log.Info("Reordered the cards for player:", p.Name)
-			}
-		}
-	}
-
 	// Do different tasks depending on the action
 	doubleDiscard := false
 	if d.Type == actionTypeClue {
@@ -220,12 +184,10 @@ func commandAction(s *Session, d *CommandData) {
 		if !touchedAtLeastOneCard &&
 			// Make an exception if they have the optional setting for "Empty Clues" turned on
 			!t.Options.EmptyClues &&
-			// Make an exception for the "Color Blind" variants (color clues touch no cards),
-			// "Number Blind" variants (rank clues touch no cards),
-			// and "Totally Blind" variants (all clues touch no cards)
-			(!strings.HasPrefix(t.Options.Variant, "Color Blind") || d.Clue.Type != clueTypeColor) &&
-			(!strings.HasPrefix(t.Options.Variant, "Number Blind") || d.Clue.Type != clueTypeRank) &&
-			!strings.HasPrefix(t.Options.Variant, "Totally Blind") &&
+			// Make an exception for variants where color clues are always allowed
+			(!variants[t.Options.Variant].ColorCluesTouchNothing || d.Clue.Type != clueTypeColor) &&
+			// Make an exception for variants where rank clues are always allowed
+			(!variants[t.Options.Variant].RankCluesTouchNothing || d.Clue.Type != clueTypeRank) &&
 			// Make an exception for certain characters
 			!characterEmptyClueAllowed(d, g, p) {
 
@@ -390,7 +352,7 @@ func commandAction(s *Session, d *CommandData) {
 			Text: text,
 		})
 		t.NotifyAction()
-		log.Info(t.GetName() + " " + text)
+		logger.Info(t.GetName() + " " + text)
 	}
 
 	// Send the new turn
@@ -399,7 +361,7 @@ func commandAction(s *Session, d *CommandData) {
 	t.NotifyTurn()
 
 	if g.EndCondition == endConditionInProgress {
-		log.Info(t.GetName() + " It is now " + np.Name + "'s turn.")
+		logger.Info(t.GetName() + " It is now " + np.Name + "'s turn.")
 	} else if g.EndCondition == endConditionNormal {
 		if g.Score == variants[g.Options.Variant].MaxScore {
 			g.Sound = "finished_perfect"
@@ -420,7 +382,7 @@ func commandAction(s *Session, d *CommandData) {
 	}
 
 	// Send the "action" message to the next player
-	nps.NotifyAction(t)
+	nps.NotifyAction()
 
 	// Send every user connected an update about this table
 	// (this is sort of wasteful but is necessary for users to see if it is

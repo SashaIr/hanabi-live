@@ -19,8 +19,8 @@ type CommandData struct {
 	Timed                bool   `json:"timed"`
 	BaseTime             int    `json:"baseTime"`    // In seconds
 	TimePerTurn          int    `json:"timePerTurn"` // In seconds
-	CardCycle          	 bool   `json:"cardCycle"`
 	Speedrun             bool   `json:"speedrun"`
+	CardCycle            bool   `json:"cardCycle"`
 	DeckPlays            bool   `json:"deckPlays"`
 	EmptyClues           bool   `json:"emptyClues"`
 	CharacterAssignments bool   `json:"characterAssignments"`
@@ -102,7 +102,7 @@ func commandInit() {
 	commandMap["chat"] = commandChat
 	commandMap["chatRead"] = commandChatRead
 	commandMap["getName"] = commandGetName
-	commandMap["historyDetails"] = commandHistoryDetails
+	commandMap["historyGetDeals"] = commandHistoryGetDeals
 	commandMap["historyGetAll"] = commandHistoryGetAll
 	commandMap["historyGet"] = commandHistoryGet
 	commandMap["replayCreate"] = commandReplayCreate

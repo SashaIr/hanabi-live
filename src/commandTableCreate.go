@@ -81,7 +81,7 @@ func commandTableCreate(s *Session, d *CommandData) {
 			match2 := replayRegExp2.FindStringSubmatch(d.Name)
 			if match1 != nil {
 				if v, err := strconv.Atoi(match1[1]); err != nil {
-					log.Error("Failed to convert the !replay argument to a number:", err)
+					logger.Error("Failed to convert the !replay argument to a number:", err)
 					s.Error("Failed to create the game. Please contact an administrator.")
 					return
 				} else {
@@ -90,14 +90,14 @@ func commandTableCreate(s *Session, d *CommandData) {
 				setReplayTurn = 1
 			} else if match2 != nil {
 				if v, err := strconv.Atoi(match2[1]); err != nil {
-					log.Error("Failed to convert the first !replay argument to a number:", err)
+					logger.Error("Failed to convert the first !replay argument to a number:", err)
 					s.Error("Failed to create the game. Please contact an administrator.")
 					return
 				} else {
 					setReplay = v
 				}
 				if v, err := strconv.Atoi(match2[2]); err != nil {
-					log.Error("Failed to convert the second !replay argument to a number:", err)
+					logger.Error("Failed to convert the second !replay argument to a number:", err)
 					s.Error("Failed to create the game. Please contact an administrator.")
 					return
 				} else {
@@ -118,8 +118,8 @@ func commandTableCreate(s *Session, d *CommandData) {
 			setReplayTurn--
 
 			// Check to see if the game ID exists on the server
-			if exists, err := db.Games.Exists(setReplay); err != nil {
-				log.Error("Failed to check to see if game "+
+			if exists, err := models.Games.Exists(setReplay); err != nil {
+				logger.Error("Failed to check to see if game "+
 					strconv.Itoa(setReplay)+" exists:", err)
 				s.Error("Failed to create the game. Please contact an administrator.")
 				return
@@ -131,8 +131,8 @@ func commandTableCreate(s *Session, d *CommandData) {
 			// Check to see if this turn is valid
 			// (it has to be a turn before the game ends)
 			var numTurns int
-			if v, err := db.Games.GetNumTurns(setReplay); err != nil {
-				log.Error("Failed to get the number of turns from the database for game "+strconv.Itoa(setReplay)+":", err)
+			if v, err := models.Games.GetNumTurns(setReplay); err != nil {
+				logger.Error("Failed to get the number of turns from the database for game "+strconv.Itoa(setReplay)+":", err)
 				s.Error(initFail)
 				return
 			} else {
@@ -144,8 +144,8 @@ func commandTableCreate(s *Session, d *CommandData) {
 			}
 
 			// Set the options of the game to be the same as the one in the database
-			if v, err := db.Games.GetOptions(setReplay); err != nil {
-				log.Error("Failed to get the variant from the database for game "+strconv.Itoa(setReplay)+":", err)
+			if v, err := models.Games.GetOptions(setReplay); err != nil {
+				logger.Error("Failed to get the variant from the database for game "+strconv.Itoa(setReplay)+":", err)
 				s.Error(initFail)
 				return
 			} else {
@@ -154,8 +154,8 @@ func commandTableCreate(s *Session, d *CommandData) {
 				d.Timed = v.Timed
 				d.BaseTime = v.BaseTime
 				d.TimePerTurn = v.TimePerTurn
-				d.CardCycle = v.CardCycle
 				d.Speedrun = v.Speedrun
+				d.CardCycle = v.CardCycle
 				d.DeckPlays = v.DeckPlays
 				d.EmptyClues = v.EmptyClues
 				d.CharacterAssignments = v.CharacterAssignments
@@ -234,8 +234,8 @@ func commandTableCreate(s *Session, d *CommandData) {
 		Timed:                d.Timed,
 		BaseTime:             d.BaseTime,
 		TimePerTurn:          d.TimePerTurn,
-		CardCycle:            d.CardCycle,
 		Speedrun:             d.Speedrun,
+		CardCycle:            d.CardCycle,
 		DeckPlays:            d.DeckPlays,
 		EmptyClues:           d.EmptyClues,
 		CharacterAssignments: d.CharacterAssignments,
@@ -246,7 +246,7 @@ func commandTableCreate(s *Session, d *CommandData) {
 		SetDeal:       setDeal,
 	}
 	tables[t.ID] = t // Add it to the map
-	log.Info(t.GetName() + "User \"" + s.Username() + "\" created a table.")
+	logger.Info(t.GetName() + "User \"" + s.Username() + "\" created a table.")
 	// (a "table" message will be sent in the "commandTableJoin" function below)
 
 	// Join the user to the new table

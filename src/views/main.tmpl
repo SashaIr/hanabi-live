@@ -34,7 +34,7 @@
                 </li>
                 <li>
                     <a id="nav-buttons-games-help" class="button" href="https://github.com/Zamiell/hanabi-live/blob/master/docs/FEATURES.md" target="_blank" rel="noopener noreferrer">
-                        <i class="fas fa-question-circle nav-icon"></i>
+                        <i class="fas fa-question-circle question-mark nav-icon"></i>
                         Help
                     </a>
                 </li>
@@ -89,9 +89,9 @@
                     </a>
                 </li>
             </ul>
-            <ul id="nav-buttons-history-details" class="hidden">
+            <ul id="nav-buttons-history-other-scores" class="hidden">
                 <li>
-                    <a id="nav-buttons-history-details-return" class="button">
+                    <a id="nav-buttons-history-other-scores-return" class="button">
                         <i class="fas fa-history nav-icon"></i>
                         <span class="nav-hotkey-indicator">R</span>eturn to History
                     </a>
@@ -172,7 +172,7 @@
             </div>
             <div class="row">
                 <div class="col-12 align-center">
-                    <a href="https://discord.gg/sQGMnRu">
+                    <a href="https://discord.gg/FADvkJp">
                         <img id="title-discord" src="/public/img/discord.png" />
                     </a>
                 </div>
@@ -301,7 +301,7 @@
                     <section id="tutorial-4-3" class="box align-center hidden">
                         <h3>Getting Games Going</h3>
                         <p>Unfortunately, the group is fairly small, so we don't have enough players to have games going at all times of the day. However, we do get games going at various times, mostly during (American) evenings.</p>
-                        <p>The members of the group hang out in a <a href="https://discord.gg/sQGMnRu" target="_blank" rel="noopener noreferrer">Discord server</a>. (Discord is a voice and text chat application that you can run in a browser.) To get games going, we generally type "/here" into the Hanabi Live lobby, which alerts everyone who happens to be at their computer that someone is wanting to get a game going.</p>
+                        <p>The members of the group hang out in a <a href="https://discord.gg/FADvkJp" target="_blank" rel="noopener noreferrer">Discord server</a>. (Discord is a voice and text chat application that you can run in a browser.) To get games going, we generally type "/here" into the Hanabi Live lobby, which alerts everyone who happens to be at their computer that someone is wanting to get a game going.</p>
                         <div class="row">
                             <div class="col-12">
                                 <a id="tutorial-4-3-ok" class="button icon fa-check">Is there anything I should know before I do my first "/here" ping?</a>
@@ -469,8 +469,8 @@
                     </div>
                 </section>
 
-                <!-- The history details table (all games on a specific seed) -->
-                <section id="lobby-history-details" class="box hidden">
+                <!-- The other scores table (all games on a specific seed) -->
+                <section id="lobby-history-other-scores" class="box hidden">
                     <div class="lobby-table-container">
                         <table class="alt">
                             <thead>
@@ -483,7 +483,7 @@
                                     <th>Share Replay</th>
                                 </tr>
                             </thead>
-                            <tbody id="lobby-history-details-table-tbody"></tbody>
+                            <tbody id="lobby-history-other-scores-table-tbody"></tbody>
                         </table>
                     </div>
                 </section>
@@ -517,13 +517,16 @@
                 </div>
                 Variant
             </div>
-            <div class="col-7">
+            <div class="col-6">
                 <input id="createTableVariant" type="text" list="create-table-variant-list" />
                 <datalist id="create-table-variant-list"></datalist>
             </div>
             <div class="col-1 input-text align-center">
+                <i id="dice" class="fas fa-dice"></i>
+            </div>
+            <div class="col-1 input-text align-center">
                 <a href="https://github.com/Zamiell/hanabi-live/blob/master/docs/VARIANTS.md" target="_blank" rel="noopener noreferrer">
-                    <i class="fas fa-question-circle"></i>
+                    <i class="fas fa-question-circle question-mark"></i>
                 </a>
             </div>
         </div>
@@ -562,25 +565,6 @@
         <div class="row">
             <div class="col-9 create-game-text-label">
                 <div class="create-game-icon">
-                    <i class="fas fa-sync-alt"></i>
-                </div>
-                Card Cycling
-            </div>
-            <div class="col-1">
-                <input id="createTableCardCycle" type="checkbox" />
-                <label for="createTableCardCycle"></label>
-            </div>
-            <div class="col-1 align-center">
-                <a href="https://github.com/SashaIr/hanabi-conventions" target="_blank" rel="noopener noreferrer">
-                    <i class="fas fa-question-circle create-game-info-icon"></i>
-                </a>
-            </div>
-        </div>
-        <br />
-
-        <div class="row">
-            <div class="col-9 create-game-text-label">
-                <div class="create-game-icon">
                     <i class="fas fa-running"></i>
                 </div>
                 Speedrun
@@ -591,7 +575,26 @@
             </div>
             <div class="col-1 align-center">
                 <a href="https://github.com/Zamiell/hanabi-live/blob/master/docs/FEATURES.md#speedruns" target="_blank" rel="noopener noreferrer">
-                    <i class="fas fa-question-circle create-game-info-icon"></i>
+                    <i class="fas fa-question-circle question-mark create-game-info-icon"></i>
+                </a>
+            </div>
+        </div>
+        <br />
+
+        <div class="row">
+            <div class="col-9 create-game-text-label">
+                <div class="create-game-icon">
+                    <i class="fas fa-sync-alt"></i>
+                </div>
+                Card Cycling
+            </div>
+            <div class="col-1">
+                <input id="createTableCardCycle" type="checkbox" />
+                <label for="createTableCardCycle"></label>
+            </div>
+            <div class="col-1 align-center">
+                <a href="https://github.com/Zamiell/hanabi-live/blob/master/docs/FEATURES.md#card-cycling" target="_blank" rel="noopener noreferrer">
+                    <i class="fas fa-question-circle question-mark create-game-info-icon"></i>
                 </a>
             </div>
         </div>
@@ -610,7 +613,7 @@
             </div>
             <div class="col-1 align-center">
                 <a href="https://github.com/Zamiell/hanabi-live/blob/master/docs/FEATURES.md#bottom-deck-blind-plays" target="_blank" rel="noopener noreferrer">
-                    <i class="fas fa-question-circle create-game-info-icon"></i>
+                    <i class="fas fa-question-circle question-mark create-game-info-icon"></i>
                 </a>
             </div>
         </div>
@@ -629,7 +632,7 @@
             </div>
             <div class="col-1 align-center">
                 <a href="https://github.com/Zamiell/hanabi-live/blob/master/docs/FEATURES.md#empty-clues" target="_blank" rel="noopener noreferrer">
-                    <i class="fas fa-question-circle create-game-info-icon"></i>
+                    <i class="fas fa-question-circle question-mark create-game-info-icon"></i>
                 </a>
             </div>
         </div>
@@ -648,7 +651,7 @@
             </div>
             <div class="col-1 align-center">
                 <a href="https://github.com/Zamiell/hanabi-live/blob/master/docs/CHARACTERS.md" target="_blank" rel="noopener noreferrer">
-                    <i class="fas fa-question-circle create-game-info-icon"></i>
+                    <i class="fas fa-question-circle question-mark create-game-info-icon"></i>
                 </a>
             </div>
         </div>
@@ -680,7 +683,7 @@
             </div>
             <div class="col-1 align-center">
                 <a href="https://github.com/Zamiell/hanabi-live/blob/master/docs/FEATURES.md#discord-integration" target="_blank" rel="noopener noreferrer">
-                    <i class="fas fa-question-circle create-game-info-icon"></i>
+                    <i class="fas fa-question-circle question-mark create-game-info-icon"></i>
                 </a>
             </div>
         </div>
@@ -697,12 +700,12 @@
         <h2>Resources</h2>
         <ul>
             <li>
-                <a href="https://discord.gg/sQGMnRu" target="_blank" rel="noopener noreferrer">The Hanabi Discord Server</a><br />
+                <a href="https://discord.gg/FADvkJp" target="_blank" rel="noopener noreferrer">The Hanabi Discord Server</a><br />
                 A place to find teammates and discuss strategy.
             </li>
             <br />
             <li>
-                <a href="https://github.com/SashaIr/hanabi-conventions" target="_blank" rel="noopener noreferrer">Strategies and Conventions</a><br />
+                <a href="https://github.com/Zamiell/hanabi-conventions" target="_blank" rel="noopener noreferrer">Strategies and Conventions</a><br />
                 This is a document that lists the strategies and conventions used by the Hyphen-ated group.<br />
                 (You don't have to use them if you don't want to.)
             </li>
@@ -713,13 +716,22 @@
             </li>
             <br />
             <li>
-                <a href="https://github.com/SashaIr/hanabi-live" target="_blank" rel="noopener noreferrer">The Code Repository</a><br />
-                This client and server are open-source, hosted on GitHub. Forked from Zamiell.
+                <a href="https://github.com/Zamiell/hanabi-live" target="_blank" rel="noopener noreferrer">The Code Repository</a><br />
+                This client and server are open-source, hosted on GitHub.
             </li>
             <br />
             <li>
-                <a href="https://github.com/giove91/hanabi" target="_blank" rel="noopener noreferrer">Hanabi AIs</a><br />
-                Several AIs that play Hanabi.
+                <a href="https://www.speedrun.com/hanabi" target="_blank" rel="noopener noreferrer">Speedrun.com Leaderboards</a><br />
+                The fastest times in the world are tracked here.
+            </li>
+            <br />
+            <li>
+                <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_blank" rel="noopener noreferrer" id="donateform" style="margin-bottom: 0;">
+                    <input type="hidden" name="cmd" value="_s-xclick">
+                    <input type="hidden" name="hosted_button_id" value="GFKEQ9MTFJRUL">
+                    <a href="#" onclick="document.getElementById('donateform').submit()">Donate (via PayPal) to Keldon</a>
+                </form>
+                Keldon was the original creator of the well-designed JavaScript client.
             </li>
         </ul>
     </div>
@@ -728,15 +740,6 @@
         <h2>Settings</h2>
 
         <p class="margin1"><strong>Game Notifications</strong></p>
-
-        <input id="sendTurnNotify" type="checkbox" />
-        <label for="sendTurnNotify">
-            <span class="label-text">
-                Show desktop notifications when it reaches your turn
-            </span>
-        </label>
-
-        <br />
 
         <input id="sendTurnSound" type="checkbox">
         <label for="sendTurnSound">
@@ -834,6 +837,15 @@
         <label for="speedrunMode">
             <span class="label-text">
                 Enable speedrun features in non-speedrun games
+            </span>
+        </label>
+
+        <br />
+
+        <input id="hyphenatedConventions" type="checkbox">
+        <label for="hyphenatedConventions">
+            <span class="label-text">
+                Enable extra <a href="https://github.com/Zamiell/hanabi-live/blob/master/docs/FEATURES.md#hyphen-ated-conventions" target="_blank" rel="noopener noreferrer">Hyphen-ated group</a> features
             </span>
         </label>
 
@@ -995,10 +1007,42 @@
     </section>
 </div>
 
-<!-- All of the JavaScript is bundled into one file with Webpack -->
+<!-- Preload some images that are used while in a game -->
+<div id="preload" class="hidden">
+    <img src="/public/img/crown.png" />
+    <img src="/public/img/eyes.png" />
+    <img src="/public/img/home.png" />
+    <img src="/public/img/note.png" />
+    <img src="/public/img/replay.png" />
+    <img src="/public/img/replay-disabled.png" />
+    <img src="/public/img/replay-back.png" />
+    <img src="/public/img/replay-back-disabled.png" />
+    <img src="/public/img/replay-back-full.png" />
+    <img src="/public/img/replay-back-full-disabled.png" />
+    <img src="/public/img/replay-forward.png" />
+    <img src="/public/img/replay-forward-disabled.png" />
+    <img src="/public/img/replay-forward-full.png" />
+    <img src="/public/img/replay-forward-full-disabled.png" />
+    <img src="/public/img/skull.png" />
+    <img src="/public/img/sparkle.png" />
+    <img src="/public/img/trashcan.png" />
+    <img src="/public/img/trashcan2.png" />
+    <img src="/public/img/x.png" />
+    <img src="/public/img/wrench.png" />
+    <img src="/public/img/background.jpg" />
+</div>
+
+<!-- Used to validate that we are connecting to the correct URL -->
+<div id="domain" class="hidden">{{.Domain}}</div>
+
+{{if eq .Title "Dev"}}
 <!--
-<script type="text/javascript" src="/public/js/lib/tooltipster.bundle.min.js"></script>
-<script type="text/javascript" src="/public/js/lib/tooltipster-scrollableTip.min.js"></script>
+    In development, we use "webpack-dev-server" to serve the JavaScript on a separate port
+    (this is necessary because it provides "hot reloading" and speeds up long compilation times)
 -->
+<script type="text/javascript" src="http://localhost:8080/main.min.js"></script>
+{{else}}
+<!-- All of the JavaScript is bundled into one file with Webpack -->
 <script type="text/javascript" src="/public/js/main.min.js"></script>
+{{end}}
 {{end}}

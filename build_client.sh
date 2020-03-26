@@ -6,10 +6,10 @@ set -e # Exit on any errors
 # https://stackoverflow.com/questions/59895/getting-the-source-directory-of-a-bash-script-from-within
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-# Set the version number in the "globals.js" file
+# Set the version number in the "version.ts" file
 # (which is equal to the number of commits in the git repository)
 VERSION=$(git rev-list --count HEAD)
-printf "module.exports = $VERSION;\n" > "$DIR/public/js/src/version.js"
+echo "$VERSION" > "$DIR/public/js/src/data/version.json"
 
 # If we need to, add the NPM directory to the path
 # (the Golang process will execute this script on a graceful shutdown
@@ -37,5 +37,7 @@ if ! command -v npx > /dev/null; then
 fi
 
 cd "$DIR/public/js"
+echo "Packing the JavaScript..."
 npx webpack # Pack the JavaScript into one file
+echo "Packing the CSS..."
 npx grunt # Pack the CSS into one file

@@ -13,7 +13,12 @@ package main
 import (
 	"encoding/json"
 	"math"
+	"regexp"
 	"strconv"
+)
+
+var (
+	actionTypeTurnRegExp = regexp.MustCompile(`"type":\s*"turn"`)
 )
 
 func commandReplayAction(s *Session, d *CommandData) {
@@ -113,20 +118,6 @@ func commandReplayAction(s *Session, d *CommandData) {
 		for _, sp := range t.Spectators {
 			sp.Session.NotifyReplayLeader(t, true)
 		}
-	} else if d.Type == replayActionTypeMorph {
-		// A "hypothetical" card morph
-		for _, sp := range t.Spectators {
-			type ReplayMorphMessage struct {
-				Order int `json:"order"`
-				Suit  int `json:"suit"`
-				Rank  int `json:"rank"`
-			}
-			sp.Session.Emit("replayMorph", &ReplayMorphMessage{
-				Order: d.Order,
-				Suit:  d.Suit,
-				Rank:  d.Rank,
-			})
-		}
 	} else if d.Type == replayActionTypeSound {
 		// A sound effect
 		for _, sp := range t.Spectators {
@@ -178,6 +169,31 @@ func commandReplayAction(s *Session, d *CommandData) {
 		g.HypoActions = append(g.HypoActions, d.ActionJSON)
 		for _, sp := range t.Spectators {
 			sp.Session.Emit("hypoAction", d.ActionJSON)
+		}
+	} else if d.Type == replayActionTypeHypoBack {
+		// The replay leader wants to go back one turn in the hypothetical
+		if len(g.HypoActions) == 0 {
+			return
+		}
+
+		// Starting from the end,
+		// remove hypothetical actions until we get to the 2nd to last "turn" action
+		for {
+			// Delete the final element in the slice
+			g.HypoActions = g.HypoActions[:len(g.HypoActions)-1]
+			if len(g.HypoActions) == 0 {
+				break
+			}
+
+			lastActionString := g.HypoActions[len(g.HypoActions)-1]
+			match := actionTypeTurnRegExp.FindStringSubmatch(lastActionString)
+			if match != nil {
+				break
+			}
+		}
+
+		for _, sp := range t.Spectators {
+			sp.Session.Emit("hypoBack", nil)
 		}
 	} else {
 		s.Error("That is an invalid type of shared replay action.")

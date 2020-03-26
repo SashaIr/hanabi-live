@@ -9,10 +9,10 @@ import (
 
 func (g *Game) InitDeck() {
 	// Suits are represented as a slice of integers from 0 to the number of suits - 1
-	// (e.g. {0, 1, 2, 3, 4} for a "Normal (5 Suits)" game)
+	// (e.g. {0, 1, 2, 3, 4} for a "No Variant" game)
 	for suitInt, suitObject := range variants[g.Options.Variant].Suits {
 		// Ranks are represented as a slice of integers
-		// (e.g. {1, 2, 3, 4, 5} for a "Normal (5 Suits)" game)
+		// (e.g. {1, 2, 3, 4, 5} for a "No Variant" game)
 		for _, rank := range variants[g.Options.Variant].Ranks {
 			// In a normal suit of Hanabi, there are:
 			// - three 1's
@@ -58,11 +58,11 @@ func (g *Game) InitDeck() {
 
 func (g *Game) SetPresetDeck(s *Session) bool {
 	filePath := path.Join(projectPath, "specific-deals", g.Seed+".txt")
-	log.Info("Using a preset deal of:", filePath)
+	logger.Info("Using a preset deal of:", filePath)
 
 	var lines []string
 	if v, err := ioutil.ReadFile(filePath); err != nil {
-		log.Error("Failed to read \""+filePath+"\":", err)
+		logger.Error("Failed to read \""+filePath+"\":", err)
 		s.Error("Failed to create the game. Please contact an administrator.")
 		return true
 	} else {
@@ -73,7 +73,7 @@ func (g *Game) SetPresetDeck(s *Session) bool {
 		// The first line is a number that signifies which player will go first
 		if i == 0 {
 			if v, err := strconv.Atoi(line); err != nil {
-				log.Error("Failed to parse the first line (that signifies which player will go first):", line)
+				logger.Error("Failed to parse the first line (that signifies which player will go first):", line)
 				s.Error("Failed to create the game. Please contact an administrator.")
 				return true
 			} else {
@@ -91,7 +91,7 @@ func (g *Game) SetPresetDeck(s *Session) bool {
 		// Parse the line for the suit and the rank
 		match2 := cardRegExp.FindStringSubmatch(line)
 		if match2 == nil {
-			log.Error("Failed to parse line "+strconv.Itoa(i+1)+":", line)
+			logger.Error("Failed to parse line "+strconv.Itoa(i+1)+":", line)
 			s.Error("Failed to start the game. Please contact an administrator.")
 			return true
 		}
@@ -99,20 +99,20 @@ func (g *Game) SetPresetDeck(s *Session) bool {
 		// Change the suit of all of the cards in the deck
 		suit := match2[1]
 		var newSuit int
-		if suit == "r" {
+		if suit == "b" {
 			newSuit = 0
-		} else if suit == "y" {
-			newSuit = 1
 		} else if suit == "g" {
+			newSuit = 1
+		} else if suit == "y" {
 			newSuit = 2
-		} else if suit == "b" {
+		} else if suit == "r" {
 			newSuit = 3
-		} else if suit == "w" {
+		} else if suit == "p" {
 			newSuit = 4
 		} else if suit == "m" {
 			newSuit = 5
 		} else {
-			log.Error("Failed to parse the suit on line "+strconv.Itoa(i+1)+":", suit)
+			logger.Error("Failed to parse the suit on line "+strconv.Itoa(i+1)+":", suit)
 			s.Error("Failed to create the game. Please contact an administrator.")
 			return true
 		}
@@ -123,7 +123,7 @@ func (g *Game) SetPresetDeck(s *Session) bool {
 		rank := match2[2]
 		var newRank int
 		if v, err := strconv.Atoi(rank); err != nil {
-			log.Error("Failed to parse the rank on line "+strconv.Itoa(i+1)+":", rank)
+			logger.Error("Failed to parse the rank on line "+strconv.Itoa(i+1)+":", rank)
 			s.Error("Failed to create the game. Please contact an administrator.")
 			return true
 		} else {

@@ -100,8 +100,8 @@ func commandHello(s *Session, d *CommandData) {
 		Timed                bool     `json:"timed"`
 		BaseTime             int      `json:"baseTime"`
 		TimePerTurn          int      `json:"timePerTurn"`
-		CardCycle            bool     `json:"cardCycle"`
 		Speedrun             bool     `json:"speedrun"`
+		CardCycle            bool     `json:"cardCycle"`
 		DeckPlays            bool     `json:"deckPlays"`
 		EmptyClues           bool     `json:"emptyClues"`
 		CharacterAssignments []string `json:"characterAssignments"`
@@ -132,8 +132,8 @@ func commandHello(s *Session, d *CommandData) {
 		Timed:                t.Options.Timed,
 		BaseTime:             t.Options.BaseTime,
 		TimePerTurn:          t.Options.TimePerTurn,
-		CardCycle:            t.Options.CardCycle,
 		Speedrun:             t.Options.Speedrun,
+		CardCycle:            t.Options.CardCycle,
 		DeckPlays:            t.Options.DeckPlays,
 		EmptyClues:           t.Options.EmptyClues,
 		CharacterAssignments: characterAssignments,

@@ -54,11 +54,11 @@ const (
 	replayActionTypeTurn  = iota // Changing the shared turn
 	replayActionTypeArrow        // Highlighting a card with an indicator arrow
 	replayActionTypeLeaderTransfer
-	replayActionTypeMorph      // Morphing a card to be something else for the purpose of a hypothetical
 	replayActionTypeSound      // Play one of the arbitrary sound effects included on the server
 	replayActionTypeHypoStart  // Start a hypothetical line
 	replayActionTypeHypoEnd    // End a hypothetical line
 	replayActionTypeHypoAction // Perform a move in the hypothetical
+	replayActionTypeHypoBack   // Go back one turn in the hypothetical
 )
 
 var (
@@ -81,6 +81,6 @@ const (
 	initFail = "Failed to initialize the game. Please contact an administrator."
 
 	// Discord emotes
-	open_mouth   = "<:open_mouth:685452458054778884>"
-	slight_frown = "<:slight_frown:664119411162218530>"
+	pogChamp   = "<:PogChamp:254683883033853954>"
+	bibleThump = "<:BibleThump:254683882601840641>"
 )

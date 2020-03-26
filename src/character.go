@@ -6,8 +6,6 @@ import (
 	"math/rand"
 	"path"
 	"strconv"
-
-	"github.com/Zamiell/hanabi-live/src/models"
 )
 
 const debugCharacter = "Insistent"
@@ -32,14 +30,14 @@ func characterInit() {
 	filePath := path.Join(dataPath, "characters.json")
 	var contents []byte
 	if v, err := ioutil.ReadFile(filePath); err != nil {
-		log.Fatal("Failed to read the \""+filePath+"\" file:", err)
+		logger.Fatal("Failed to read the \""+filePath+"\" file:", err)
 		return
 	} else {
 		contents = v
 	}
 	characters = make(map[string]Character)
 	if err := json.Unmarshal(contents, &characters); err != nil {
-		log.Fatal("Failed to convert the characters file to JSON:", err)
+		logger.Fatal("Failed to convert the characters file to JSON:", err)
 		return
 	}
 
@@ -50,14 +48,14 @@ func characterInit() {
 	for name, character := range characters {
 		// Validate that all of the names are unique
 		if _, ok := uniqueNameMap[name]; ok {
-			log.Fatal("There are two characters with the name of \"" + name + "\".")
+			logger.Fatal("There are two characters with the name of \"" + name + "\".")
 			return
 		}
 		uniqueNameMap[name] = true
 
 		// Validate that all of the ID's are unique
 		if _, ok := uniqueIDMap[character.ID]; ok {
-			log.Fatal("There are two characters with the ID of " +
+			logger.Fatal("There are two characters with the ID of " +
 				"\"" + strconv.Itoa(character.ID) + "\".")
 			return
 		}
@@ -85,9 +83,9 @@ func characterGenerate(g *Game) {
 	// generating new random ones
 	if g.Options.SetReplay != 0 {
 		// Get the players from the database
-		var dbPlayers []*models.Player
-		if v, err := db.Games.GetPlayers(g.Options.SetReplay); err != nil {
-			log.Error("Failed to get the players from the database for game "+strconv.Itoa(g.Options.SetReplay)+":", err)
+		var dbPlayers []*DBPlayer
+		if v, err := models.Games.GetPlayers(g.Options.SetReplay); err != nil {
+			logger.Error("Failed to get the players from the database for game "+strconv.Itoa(g.Options.SetReplay)+":", err)
 			return
 		} else {
 			dbPlayers = v
@@ -483,6 +481,41 @@ func characterCheckDiscard(s *Session, g *Game, p *GamePlayer) bool {
 }
 
 func characterPostClue(d *CommandData, g *Game, p *GamePlayer) {
+	// Handle card-reordering
+	if g.Options.CardCycle {
+		// Find the chop card
+		chopIndex := p.GetChopIndex()
+
+		// We don't need to reorder anything if the chop is slot 1
+		// (the left-most card)
+		if chopIndex != len(p.Hand)-1 {
+			chopCard := p.Hand[chopIndex]
+
+			// Remove the chop card from their hand
+			p.Hand = append(p.Hand[:chopIndex], p.Hand[chopIndex+1:]...)
+
+			// Add it to the end (the left-most position)
+			p.Hand = append(p.Hand, chopCard)
+
+			// Make an array that represents the order of the player's hand
+			handOrder := make([]int, 0)
+			for _, c := range p.Hand {
+				handOrder = append(handOrder, c.Order)
+			}
+
+			// Notify everyone about the reordering
+			g.Actions = append(g.Actions, ActionReorder{
+				Type:      "reorder",
+				Target:    p.Index,
+				HandOrder: handOrder,
+			})
+
+			t := g.Table
+			t.NotifyAction()
+			logger.Info("Reordered the cards for player:", p.Name)
+		}
+	}
+
 	if !g.Options.CharacterAssignments {
 		return
 	}
